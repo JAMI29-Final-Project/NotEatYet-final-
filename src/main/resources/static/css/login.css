@@ -1,0 +1,60 @@
+.pictureLogin {
+	background-image: url('https://i.pinimg.com/originals/0e/61/13/0e6113bbc2abaab64f1a795559b113fc.jpg'); 
+    height: 100vh; 
+    margin: 0px; 
+    background-size: cover; 
+    background-position: top;
+}
+
+.captionCenter {
+    position: absolute;
+    margin: 0;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+/* EFFETTO ROTAZIONE IMG ON MOUSE */
+.hover-rotate {
+    overflow: hidden;
+    margin: 8px;
+    min-width: 240px;
+    max-width: 320px;
+    width: 100%;
+  }
+  
+  .hover-rotate img {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+  
+  .hover-rotate:hover img {
+    transform: scale(1.3) rotate(5deg);
+  }
+
+  .pictureCorrectLogin {
+	background-image: url('https://images2.alphacoders.com/934/934992.jpg'); 
+    height: 100vh; 
+    margin: 0px; 
+    background-size: cover; 
+    background-position: top;
+}
+
+.pictureErrorLogin {
+	background-image: url('https://www.digipen.edu.sg/sites/default/files/public/img/academics/01-hero/digipen-singapore-continuing-education-cybersecurity-software-developer.jpg'); 
+    height: 100vh; 
+    margin: 0px; 
+    background-size: cover; 
+    background-position: top;
+}
+
+.videoLogin {
+    position: fixed;
+    width: 100vh;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
