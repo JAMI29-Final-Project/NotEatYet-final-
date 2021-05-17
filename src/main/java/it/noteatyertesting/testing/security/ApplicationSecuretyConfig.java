@@ -43,10 +43,18 @@ public class ApplicationSecuretyConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .defaultSuccessUrl("login_success.html", true)
                 .failureUrl("login_error.html")
+                .passwordParameter("password")
+                .usernameParameter("username")
+                .and()
+                .rememberMe()
+                .rememberMeParameter("remember-me")
                 .and()
                 .logout().logoutUrl("/logout")
                 .logoutSuccessUrl("/logout.html")
-                .clearAuthentication(true).logoutSuccessUrl("/homepage.html");
+                .clearAuthentication(true)
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .logoutSuccessUrl("/homepage.html");
     }
 
     @Bean
@@ -61,4 +69,5 @@ public class ApplicationSecuretyConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(daoAuthenticationProvider());
     }
+
 }

@@ -37,14 +37,12 @@ public class ControllerRistoranti {
 
         @GetMapping("/ristoranti/{id}")
         public Ristorante getOne(@PathVariable int id) {
-
         Ristorante ristorante = ristorantiGEST.findById(id).orElse(null);
         ristorante.setMenu(piattiGEST.findPiattoByRistoranteId(id));
         for(Piatto piatto : ristorante.getMenu()){
             piatto.setIngredienti(ingredientiGEST.findIngredienteByPiattoId(piatto.getId()));
         }
         return ristorante;
-
     }
 
     @PostMapping("/ristoranti")
@@ -65,7 +63,6 @@ public class ControllerRistoranti {
         }
         ristorantiGEST.deleteById(ristorante.getId());
     }
-
     @PutMapping("/ristoranti")
     public void editRistorant(@RequestBody Ristorante ristoranteedit){
         ristorantiGEST.save(ristoranteedit);
