@@ -12,7 +12,10 @@ $(document).ready(function () {
                     text: 'Utente inserito Correttamente',
                     showConfirmButton: false,
                     timer: 1500
-                })
+                }),
+                setTimeout(function (render) {
+                    window.location.href='login_Page.html';
+                }, 2000)
             },
             error: function () {
                 Swal.fire({
