@@ -6,6 +6,10 @@
     background-position: top;
 }
 
+.borderRadius{
+  border-radius: 100px !important;
+}
+
 .captionCenter {
     position: absolute;
     margin: 0;
