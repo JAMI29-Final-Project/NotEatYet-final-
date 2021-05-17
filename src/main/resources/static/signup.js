@@ -13,9 +13,6 @@ $(document).ready(function () {
                     showConfirmButton: false,
                     timer: 1500
                 })
-                setTimeout(function () {
-                      window.location.href='ristoranti.html';
-                    }, 1500);
             },
             error: function () {
                 Swal.fire({
