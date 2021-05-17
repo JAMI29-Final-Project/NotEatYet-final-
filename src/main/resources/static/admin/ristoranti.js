@@ -32,9 +32,6 @@ $(document).ready(function () {
     $('#listaDettaglioClose').click(function (){
         $('#dettaglioPiatto').html('');
     });
-   /* $('#ristoranteDettaglioCloseHead').on('click', '#ristoranteDettaglioClose', function () {
-        getRistoranti();
-    });*/
     // Dettaglio Del Ristorante
     $('#listaRistoranti').on('click', '.btn-dettaglio', function () {
         const idristorante = $(this).attr('data-id');
