@@ -32,6 +32,7 @@ $(document).ready(function () {
     });
     $('#listaDettaglioClose').click(function (){
         $('#dettaglioPiatto').html('');
+        $('#listaingre').html('');
     });
     // Dettaglio Del Ristorante
     $('#listaRistoranti').on('click', '.btn-dettaglio', function () {
@@ -350,7 +351,6 @@ $(document).ready(function () {
             <h4 class='fw-light text-dark'><strong>Prezzo: </strong>${dettaglio.prezzo}</h4>   
             <h4 class='fw-light text-dark'><strong>Categoria: </strong>${dettaglio.categoria.nome}</h4> 
             <h4 class='fw-light text-dark'><strong>Ingredienti: </strong></h4>
-            <div id="listaingre"></div>
 			`;
             $(row).hide().appendTo(dettaglioPiatto).fadeIn(500);
 		})
@@ -358,8 +358,10 @@ $(document).ready(function () {
         $.get(`/admin/ingredienti/${idDetPiatto}`, function (ingredienti) {
             const listaingredienti = $('#listaingre');
             console.log(ingredienti);
-            if (ingredienti === null){
-                let error = `<h4 class='fw-light text-dark'><strong>Ingredienti: </strong>Non sono presenti Ingredienti</h4>`;
+            if (ingredienti.length == 0){
+                console.log("Sono Dentro");
+                let error = `<h4 class='fw-light text-dark'>Non sono presenti Ingredienti</h4>`;
+                $(listaingredienti).append(error);
             } else {
                 for (let i = 0; i < ingredienti.length; i++) {
                     let lista = `<h5 class='fw-light text-dark'>${ingredienti[i].nome}</h5>`;

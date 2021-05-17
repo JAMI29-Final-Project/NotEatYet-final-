@@ -48,24 +48,17 @@
 	                     <li class='nav-item distance-btn'>   
 	                       <a class='nav-link active bg-yellow text-btn' aria-current='page' href='ristoranti.html'>Home</a>   
 	                     </li> 
-                          <li class='nav-item dropdown distance-btn'>   
-                            <a class='nav-link dropdown-toggle bg-yellow text-btn' href='#' id='navbarDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>Opzioni</a>   
-                                <ul class='dropdown-menu dropdown-menu-lg-end' aria-labelledby='navbarDropdown'>   
-                                  <li><a class='dropdown-item' aria-current='page' href='aggiungi-ristorante.html'>Aggiungi Ristorante</a></li>
-                                  <li><a class='dropdown-item' aria-current='page' href='aggiungi-piatto.html'>Aggiungi Piatto al Menu</a></li>
-                                  <li><a class='dropdown-item disabled' data-bs-toggle="modal" data-bs-target="#aggiungiCategoria" hidden>Aggiungi Categoria</a></li>
-                                </ul> 
-                              </li>
                               <li class='nav-item dropdown distance-btn'>   
                                 <a class='nav-link dropdown-toggle bg-yellow text-btn' href='#' id='navbarDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>   
                                     Altro 
                                 </a>   
-                                <ul class='dropdown-menu dropdown-menu-lg-end' aria-labelledby='navbarDropdown'>   
+                                <ul class='dropdown-menu dropdown-menu-lg-end' aria-labelledby='navbarDropdown'>
+                                  <li><a class='dropdown-item disabled' aria-current='page' href='#'>Gestione Account (FIXME)</a></li>   
                                   <li><a class='dropdown-item' aria-current='page' href='changelog.html'>Changelog</a></li>
                                 </ul> 
                                 </li>
                           <li class='nav-item distance-btn'>   
-                            <a class='nav-link active bg-yellow text-btn' aria-current='page' href='homepage.html'>Esci</a>   
+                            <a class='nav-link active bg-yellow text-btn' aria-current='page' href='/logout'>Logout</a>   
                           </li>
 			            </li>   
 			        </ul> 
@@ -219,6 +212,7 @@
                     <div class="modal-body"> 
                                 <div class='text-center'> 
                                   <div id="dettaglioPiatto"></div>
+                                  <div id="listaingre"></div>
                                 </div>   
                                 <br></br><hr>
                                    <a href='ristoranti.html' class='btn btn-primary float-end'>Torna ai Ristoranti</button></a> 
