@@ -31,7 +31,7 @@ public class ApplicationSecuretyConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().antMatchers("/", "/css/**", "/img/**", "/logos/**", "/videos/**",
                                                 "/homepage.html","/login_error.html", "/login_Page.html",
                                                 "/login_success.html","/sign_up.html","/forbidden.html",
-                                                "/jquery-3.6.0.min.js","/logout.html","/signup.js").permitAll()
+                                                "/jquery-3.6.0.min.js","/logout.html","/signup.js", "/signup/add","/login").permitAll()
                 .antMatchers("/admin/**").hasAnyRole(Roles.ADMIN)
                 .antMatchers("/user/**").hasAnyRole(Roles.USER)
                 .anyRequest().authenticated()
