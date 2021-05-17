@@ -45,10 +45,10 @@ public class ControllerRistoranti {
         return ristorante;
     }
 
-    @PostMapping("/ristoranti")
-    public void addResturant(@RequestBody Ristorante ristorante) {
-        ristorantiGEST.save(ristorante);
-    }
+//    @PostMapping("/ristoranti")
+//    public void addResturant(@RequestBody Ristorante ristorante) {
+//        ristorantiGEST.save(ristorante);
+//    }
 
     @DeleteMapping("/ristoranti/{id}")
     public void deleteResturant(@PathVariable int id) {

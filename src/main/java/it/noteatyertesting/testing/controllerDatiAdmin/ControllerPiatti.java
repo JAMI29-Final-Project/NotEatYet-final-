@@ -1,10 +1,10 @@
 package it.noteatyertesting.testing.controllerDatiAdmin;
 
 
-import it.noteatyertesting.testing.model.Categoria;
-import it.noteatyertesting.testing.model.Ingrediente;
+//import it.noteatyertesting.testing.model.Categoria;
+//import it.noteatyertesting.testing.model.Ingrediente;
 import it.noteatyertesting.testing.model.Piatto;
-import it.noteatyertesting.testing.model.Ristorante;
+//import it.noteatyertesting.testing.model.Ristorante;
 import it.noteatyertesting.testing.repository.ICategorieCRUD;
 import it.noteatyertesting.testing.repository.IIngredientiCRUD;
 import it.noteatyertesting.testing.repository.IPiattiCRUD;
@@ -62,33 +62,33 @@ public class ControllerPiatti {
         return piatto;
     }
 
-    @PostMapping("/piatti/aggiungi/{idRistorante}/{idCategoria}")
-    public void addPiatto(@PathVariable int idRistorante, @PathVariable int idCategoria, @RequestBody Piatto piatto){
-        Categoria categoria = categorieGEST.findById(idCategoria).orElse(null);
-        Ristorante ristorante = ristorantiGEST.findById(idRistorante).orElse(null);
-        piatto.setCategoria(categoria);
-        piatto.setRistorante(ristorante);
-        piattiGEST.save(piatto);
-    }
+//    @PostMapping("/piatti/aggiungi/{idRistorante}/{idCategoria}")
+//    public void addPiatto(@PathVariable int idRistorante, @PathVariable int idCategoria, @RequestBody Piatto piatto){
+//        Categoria categoria = categorieGEST.findById(idCategoria).orElse(null);
+//        Ristorante ristorante = ristorantiGEST.findById(idRistorante).orElse(null);
+//        piatto.setCategoria(categoria);
+//        piatto.setRistorante(ristorante);
+//        piattiGEST.save(piatto);
+//    }
 
-    @DeleteMapping("/piatti/elimina/{idPiatto}")
-    public void delete(@PathVariable int idPiatto){
-        Piatto piatto = piattiGEST.findById(idPiatto).orElse(null);
-        piatto.setIngredienti(ingredientiGEST.findIngredienteByPiattoId(piatto.getId()));
-        if(piatto.getIngredienti() != null){
-            for(Ingrediente ingrediente : piatto.getIngredienti()){
-                ingredientiGEST.deleteById(ingrediente.getId());
-            }
-        }
-        piattiGEST.deleteById(idPiatto);
-    }
+//    @DeleteMapping("/piatti/elimina/{idPiatto}")
+//    public void delete(@PathVariable int idPiatto){
+//        Piatto piatto = piattiGEST.findById(idPiatto).orElse(null);
+//        piatto.setIngredienti(ingredientiGEST.findIngredienteByPiattoId(piatto.getId()));
+//        if(piatto.getIngredienti() != null){
+//            for(Ingrediente ingrediente : piatto.getIngredienti()){
+//                ingredientiGEST.deleteById(ingrediente.getId());
+//            }
+//        }
+//        piattiGEST.deleteById(idPiatto);
+//    }
 
-    @PutMapping("/piatti/edit/{idCategoria}")
-    public void editPiatto( @PathVariable int idCategoria, @RequestBody Piatto piattoModifica ){
-        Piatto piatto = piattiGEST.findById(piattoModifica.getId()).orElse(null);
-        piattoModifica.setRistorante(piatto.getRistorante());
-        Categoria categoria = categorieGEST.findById(idCategoria).orElse(null);
-        piattoModifica.setCategoria(categoria);
-        piattiGEST.save(piattoModifica);
-    }
+//    @PutMapping("/piatti/edit/{idCategoria}")
+//    public void editPiatto( @PathVariable int idCategoria, @RequestBody Piatto piattoModifica ){
+//        Piatto piatto = piattiGEST.findById(piattoModifica.getId()).orElse(null);
+//        piattoModifica.setRistorante(piatto.getRistorante());
+//        Categoria categoria = categorieGEST.findById(idCategoria).orElse(null);
+//        piattoModifica.setCategoria(categoria);
+//        piattiGEST.save(piattoModifica);
+//    }
 }
