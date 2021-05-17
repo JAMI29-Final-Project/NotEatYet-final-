@@ -364,7 +364,7 @@ $(document).ready(function () {
                 for (let i = ingredienti.length -1; i >= 0; i--) {
                     console.log(ingredienti[i].nome)
                     let lista = `<li>${ingredienti[i].nome}</li>`;
-                    $(lista).hide().appendTo(listaingredienti).fadeIn(i * 150);
+                    $(listaingredienti).append(lista);
             }
         }
 	})
