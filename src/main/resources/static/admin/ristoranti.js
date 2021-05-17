@@ -1,6 +1,6 @@
 $(document).ready(function () {
     function getRistoranti() {
-        $.get('/ristoranti', function (resume) {
+        $.get('/admin/ristoranti', function (resume) {
             const output = $('#listaRistoranti');
             for (let i = resume.length -1; i >= 0; i--) {
                 $(`<tr id='riga-${resume[i].id}'>
@@ -38,7 +38,7 @@ $(document).ready(function () {
         getRisto(idristorante);
     });
     function getRisto(idristorante) {
-        $.get(`ristoranti/${idristorante}`, function (dettaglio) {
+        $.get(`/admin/ristoranti/${idristorante}`, function (dettaglio) {
             console.log(dettaglio);
             const dettaglioRis = $('#dettaglioRis');
             $('#title').text(dettaglio.ragionesociale + ' Nel Dettaglio');
@@ -52,7 +52,7 @@ $(document).ready(function () {
 			`;
             $(row).hide().appendTo(dettaglioRis).fadeIn(500);
 		})
-        $.get(`piatti/ristoranteid/${idristorante}`, function(listaPiatti) {
+        $.get(`/admin/piatti/ristoranteid/${idristorante}`, function(listaPiatti) {
             const ristoranteListaPiatti = $('#listaMenuDettaglio');
             for (let i = listaPiatti.length -1; i >= 0; i--) {
                 $(`<tr id='riga-${listaPiatti[i].id}'>

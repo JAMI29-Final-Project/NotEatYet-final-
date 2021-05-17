@@ -14,6 +14,7 @@ import java.util.List;
 
 
 @RestController
+@RequestMapping("/admin")
 public class ControllerRistoranti {
 
     //interfaccia che gestisce le chiamate della tabella Ristoranti
