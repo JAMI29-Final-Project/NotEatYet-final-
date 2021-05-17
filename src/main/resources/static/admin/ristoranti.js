@@ -359,11 +359,10 @@ $(document).ready(function () {
             const listaingredienti = $('#listaingre');
             console.log(ingredienti);
             if (ingredienti === null){
-                `<h4 class='fw-light text-dark'><strong>Ingredienti: </strong>Non sono presenti Ingredienti</h4>`
+                let error = `<h4 class='fw-light text-dark'><strong>Ingredienti: </strong>Non sono presenti Ingredienti</h4>`;
             } else {
-                for (let i = ingredienti.length -1; i >= 0; i--) {
-                    console.log(ingredienti[i].nome)
-                    let lista = `<li>${ingredienti[i].nome}</li>`;
+                for (let i = 0; i < ingredienti.length; i++) {
+                    let lista = `<h5 class='fw-light text-dark'>${ingredienti[i].nome}</h5>`;
                     $(listaingredienti).append(lista);
             }
         }
