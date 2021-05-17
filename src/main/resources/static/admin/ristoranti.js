@@ -4,6 +4,7 @@ $(document).ready(function () {
             const output = $('#listaRistoranti');
             for (let i = resume.length -1; i >= 0; i--) {
                 $(`<tr id='riga-${resume[i].id}'>
+                <td>${resume[i].user.nome} ${resume[i].user.cognome}</td>
                 <td class='ragionesociale'>${resume[i].ragionesociale}</td>
                 <td class='piva'>${resume[i].piva}</td>
                 <td class='via'>${resume[i].via}</td>
@@ -60,14 +61,7 @@ $(document).ready(function () {
                 <td>${listaPiatti[i].prezzo}</td>
                 <td>${listaPiatti[i].categoria.nome}</td>
                 <td>
-                    <div class="btn-group" role="group">
-                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Opzioni</button>
-                            <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                <li><a class="dropdown-item btn-dettaglioPiatto" data-bs-toggle="modal" data-bs-target="#dettaglioPiat" data-idLista='${listaPiatti[i].id}'>Dettaglio</a></li>
-                                <li><a class="dropdown-item btn-modifica" data-bs-toggle="modal" data-bs-target="#modificaPiat" data-idLista='${listaPiatti[i].id}'>Modifica</a></li>
-                                <li><a class="dropdown-item btn-elimina" data-idLista='${listaPiatti[i].id}'>Elimina</a></li>
-                            </ul>
-                    </div>
+                    <a class="btn btn-primary btn-dettaglioPiatto text-light" data-bs-toggle="modal" data-bs-target="#dettaglioPiat" data-idLista='${listaPiatti[i].id}'>Dettaglio</a>
                 </td>
             </tr>`).hide().appendTo(ristoranteListaPiatti).fadeIn(i * 150); //Gestisci i pulsanti
             }
@@ -133,7 +127,7 @@ $(document).ready(function () {
     function modificaRistorante(ristorante) {
         $.ajax({
             type: "PUT",
-            url: "ristoranti",
+            url: `/admin/ristoranti`,
             data: JSON.stringify(ristorante),
             contentType: 'application/json',
             dataType: 'json',
@@ -150,7 +144,7 @@ $(document).ready(function () {
         editMode = true;
         const id = +$(this).attr('data-id');
         idModifica = id;
-        $.get(`/ristoranti/${id}`, function(modifica) {
+        $.get(`/admin/ristoranti/${id}`, function(modifica) {
             $('#ragionesociale').val(modifica.ragionesociale);
             $('#piva').val(modifica.piva);
             $('#cittaRistorante').val(modifica.citta);
@@ -349,17 +343,30 @@ $(document).ready(function () {
     });
     function getPiatto(idDetPiatto) {
         $.get(`piatti/piattoid/${idDetPiatto}`, function (dettaglio) {
-            console.log(dettaglio);
             const dettaglioPiatto = $('#dettaglioPiatto');
             $('#titlePiatto').text(dettaglio.nome + ' Nel Dettaglio');
 			let row = `
             <h4 class='fw-light text-dark'><strong class="fw-bolder">Nome: </strong>${dettaglio.nome}</h4> 
             <h4 class='fw-light text-dark'><strong>Prezzo: </strong>${dettaglio.prezzo}</h4>   
             <h4 class='fw-light text-dark'><strong>Categoria: </strong>${dettaglio.categoria.nome}</h4> 
-            <h4 class='fw-light text-dark'><strong>Ingredienti: </strong>${dettaglio.ingredienti}</h4>
+            <h4 class='fw-light text-dark'><strong>Ingredienti: </strong></h4>
+            <div id="listaingre"></div>
 			`;
             $(row).hide().appendTo(dettaglioPiatto).fadeIn(500);
 		})
         
-	} 
+        $.get(`/admin/ingredienti/${idDetPiatto}`, function (ingredienti) {
+            const listaingredienti = $('#listaingre');
+            console.log(ingredienti);
+            if (ingredienti === null){
+                `<h4 class='fw-light text-dark'><strong>Ingredienti: </strong>Non sono presenti Ingredienti</h4>`
+            } else {
+                for (let i = ingredienti.length -1; i >= 0; i--) {
+                    console.log(ingredienti[i].nome)
+                    let lista = `<li>${ingredienti[i].nome}</li>`;
+                    $(lista).hide().appendTo(listaingredienti).fadeIn(i * 150);
+            }
+        }
+	})
+    }
 });
