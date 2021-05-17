@@ -33,7 +33,18 @@ public class ApplicationSecuretyConfig extends WebSecurityConfigurerAdapter {
                                                             "/sign_up.html", "/forbidden.html", "/jquery-3.6.0.min.js",
                                                             "/logout.html", "/signup.js", "/signup/add", "/login").permitAll()
                 .antMatchers("/login_success.html").hasAnyRole(Roles.ADMIN, Roles.USER)
+                //acesso ai template Admin
                 .antMatchers("/admin/**").hasAnyRole(Roles.ADMIN)
+                //accesso controllerAdmin
+                //controllerRistoranti
+                .antMatchers("/ristoranti","/ristoranti/{id}").hasAnyRole(Roles.ADMIN)
+                //controllerPiatti
+                .antMatchers("/piatti","/piatti/ristoranteid/{idRistoratore}","/piatti/piattoid/{idPiatto}",
+                                        "/piatti/aggiungi/{idRistorante}/{idCategoria}","/piatti/elimina/{idPiatto}",
+                                        "/piatti/edit/{idCategoria}").hasAnyRole(Roles.ADMIN)
+                //controllerCategorie
+                .antMatchers("/categorie").hasAnyRole(Roles.ADMIN)
+                //controllerUtenti (fix)
                 .antMatchers("/user/**","/user/ristoranti","/user/ristoranti/{via}").hasAnyRole(Roles.USER)
                 .anyRequest().authenticated()
                 .and()
