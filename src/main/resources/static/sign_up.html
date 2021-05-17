@@ -21,7 +21,6 @@
 </head>
 <body class='bg-image pictureLogin'>  
     <!-- Fine Menu, inzio pagina --> 
-    <form action="/signup" method="post"> 
         <div class='container'> 
             <div class='row'> 
                 <div class='col-lg-7 mx-auto'> 
@@ -35,35 +34,35 @@
                             <div class="row">
                                     <div class='mb-3 col'> 
                                         <label for='nome' class='form-label'>Inserire Nome</label> 
-                                        <input type='text' name='nome' class='form-control' placeholder="Inserire nome..." required>
+                                        <input type='text' name='nome' id="nome" class='form-control' placeholder="Inserire nome..." required>
                                     </div> 
                                     <div class='mb-3 col'> 
                                         <label for='cognome' class='form-label'>Inserire Cognome</label> 
-                                        <input type='password' name='cognome' class='form-control' placeholder="Inserire Cognome..." required>  
+                                        <input type='text' name='cognome' id="cognome" class='form-control' placeholder="Inserire Cognome..." required>  
                                     </div>
                             </div>
                             <div class="row">
                                     <div class='mb-3 col'> 
                                         <label for='datadinascita' class='form-label'>Inserire Data di Nascita</label>
-                                        <input type='date' name='datadinascita' class='form-control' placeholder="Inserire Data di Nascita..." required>
+                                        <input type='date' name='datadinascita' id="datadinascita" class='form-control' placeholder="Inserire Data di Nascita..." required>
                                     </div> 
                                     <div class='mb-3 col'> 
-                                        <label for='mail' class='form-label'>Inserire E-Mail</label> 
-                                        <input type='email' name='mail' class='form-control' placeholder="Inserire E-Mail..." required> 
+                                        <label for='email' class='form-label'>Inserire E-Mail</label> 
+                                        <input type='email' name='email' id="email" class='form-control' placeholder="Inserire E-Mail..." required> 
                                     </div> 
                                     </div>
                                     <div class="row">
                                     <div class='mb-3 col'> 
-                                        <label for='nome' class='form-label'>Inserire Username</label> 
-                                        <input type='text' name='username' class='form-control' placeholder="Inserire Username..." required> 
+                                        <label for='username' class='form-label'>Inserire Username</label> 
+                                        <input type='text' name='username' id="username" class='form-control' placeholder="Inserire Username..." required> 
                                     </div> 
                                     <div class='mb-3 col'> 
                                         <label for='password' class='form-label'>Inserire Password</label> 
-                                        <input type='password' name='password' class='form-control' placeholder="Inserire Password..." required>  
+                                        <input type='password' name='password' id="password" class='form-control' placeholder="Inserire Password..." required>  
                                     </div>
                                     </div>
                                         <div class="mb-3">
-                                            <input type="submit" class='btn btn-primary float-end'></input> 
+                                            <a class='btn btn-primary float-end'>SignUp</a> 
                                         </div>
                                 </div> 
                         </div> 
