@@ -27,9 +27,10 @@ public class ApplicationSecuretyConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
+
                 .authorizeRequests().antMatchers("/", "/CSS/**", "/img/**", "/logos/**", "/videos/**",
-                                                "homepage.html","login_error.html", "login_Page.html",
-                                                "login_success.html","sign_up.html","/forbidden.html").permitAll()
+                                                "/homepage.html","/login_error.html", "/login_Page.html",
+                                                "/login_success.html","/sign_up.html","/forbidden.html").permitAll()
                 .antMatchers("/admin/**").hasAnyRole(Roles.ADMIN)
                 .antMatchers("/user/**").hasAnyRole(Roles.USER)
                 .anyRequest().authenticated()
@@ -38,11 +39,11 @@ public class ApplicationSecuretyConfig extends WebSecurityConfigurerAdapter {
                 .accessDeniedPage("/forbidden.html")
                 .and()
                 .formLogin()
-                .loginPage("login_Page.html")
+                .loginPage("/login_Page.html")
                 .loginProcessingUrl("/login")
                 .permitAll()
-                .defaultSuccessUrl("login_success.html", true)
-                .failureUrl("login_error.html")
+                .defaultSuccessUrl("/login_success.html", true)
+                .failureUrl("/login_error.html")
                 .passwordParameter("password")
                 .usernameParameter("username")
                 .and()
