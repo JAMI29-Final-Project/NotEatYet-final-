@@ -34,7 +34,7 @@ public class ApplicationSecuretyConfig extends WebSecurityConfigurerAdapter {
                                                             "/logout.html", "/signup.js", "/signup/add", "/login").permitAll()
                 .antMatchers("/login_success.html").hasAnyRole(Roles.ADMIN, Roles.USER)
                 .antMatchers("/admin/**").hasAnyRole(Roles.ADMIN)
-                .antMatchers("/user/**").hasAnyRole(Roles.USER)
+                .antMatchers("/user/**","/user/ristoranti","/user/ristoranti/{via}").hasAnyRole(Roles.USER)
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling()

@@ -1,6 +1,7 @@
-package it.noteatyertesting.testing.controllerDatiAdmin;
+package it.noteatyertesting.testing.controllerDatiUser;
 
-
+import it.noteatyertesting.testing.auth.User;
+import it.noteatyertesting.testing.auth.UtenteCRUD;
 import it.noteatyertesting.testing.model.Ingrediente;
 import it.noteatyertesting.testing.model.Piatto;
 import it.noteatyertesting.testing.model.Ristorante;
@@ -10,11 +11,14 @@ import it.noteatyertesting.testing.repository.IRistorantiCRUD;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
-
 @RestController
-public class ControllerRistoranti {
+public class ControllerRistorantiUser {
+
+    @Autowired
+    UtenteCRUD daoUser;
 
     //interfaccia che gestisce le chiamate della tabella Ristoranti
     @Autowired
@@ -28,14 +32,16 @@ public class ControllerRistoranti {
     @Autowired
     IIngredientiCRUD ingredientiGEST;
 
-    @GetMapping("/ristoranti")
-        public List<Ristorante> getAll() {
+    @GetMapping("/user/ristoranti")
+    List<Ristorante>  elenco(Principal principal){
+        String username = principal.getName();
+        User utente = (User) daoUser.findByUsername(username).orElse(null);
+        System.out.println(username);
+        return ristorantiGEST.findByUserId(utente.getId());
+    }
 
-            return ristorantiGEST.findAll();
-        }
-
-        @GetMapping("/ristoranti/{id}")
-        public Ristorante getOne(@PathVariable int id) {
+    @GetMapping("/user/ristoranti/{id}")
+    public Ristorante getOne(@PathVariable int id) {
         Ristorante ristorante = ristorantiGEST.findById(id).orElse(null);
         ristorante.setMenu(piattiGEST.findPiattoByRistoranteId(id));
         for(Piatto piatto : ristorante.getMenu()){
@@ -43,13 +49,12 @@ public class ControllerRistoranti {
         }
         return ristorante;
     }
-
-    @PostMapping("/ristoranti")
+    @PostMapping("/user/ristoranti")
     public void addResturant(@RequestBody Ristorante ristorante) {
         ristorantiGEST.save(ristorante);
     }
 
-    @DeleteMapping("/ristoranti/{id}")
+    @DeleteMapping("/user/ristoranti/{id}")
     public void deleteResturant(@PathVariable int id) {
 
         Ristorante ristorante = getOne(id);
@@ -62,9 +67,11 @@ public class ControllerRistoranti {
         }
         ristorantiGEST.deleteById(ristorante.getId());
     }
-    @PutMapping("/ristoranti")
+    @PutMapping("/user/ristoranti")
     public void editRistorant(@RequestBody Ristorante ristoranteedit){
         ristorantiGEST.save(ristoranteedit);
     }
+
+
 
 }

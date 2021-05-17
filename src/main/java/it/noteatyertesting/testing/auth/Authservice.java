@@ -34,7 +34,7 @@ public class Authservice implements UserDetailsService {
     }
 
     public void signup (String nome, String cognome, String datadinascita, String email, String username, String password){
-        System.out.println("Ciao");
+
         User newUser = new User();
         newUser.setNome(nome);
         newUser.setCognome(cognome);
