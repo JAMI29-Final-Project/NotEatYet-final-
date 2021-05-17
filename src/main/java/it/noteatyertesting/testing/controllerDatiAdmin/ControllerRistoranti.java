@@ -65,6 +65,8 @@ public class ControllerRistoranti {
     }
     @PutMapping("/ristoranti")
     public void editRistorant(@RequestBody Ristorante ristoranteedit){
+        Ristorante ristorante = ristorantiGEST.findById(ristoranteedit.getId()).orElse(null);
+        ristoranteedit.setUser(ristorante.getUser());
         ristorantiGEST.save(ristoranteedit);
     }
 
