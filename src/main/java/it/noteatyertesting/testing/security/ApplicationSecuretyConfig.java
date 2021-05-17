@@ -29,9 +29,10 @@ public class ApplicationSecuretyConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
 
                 .authorizeRequests().antMatchers("/", "/css/**", "/img/**", "/logos/**", "/videos/**",
-                                                "/homepage.html","/login_error.html", "/login_Page.html",
-                                                "/login_success.html","/sign_up.html","/forbidden.html",
-                                                "/jquery-3.6.0.min.js","/logout.html","/signup.js", "/signup/add","/login").permitAll()
+                                                            "/homepage.html", "/login_error.html", "/login_Page.html",
+                                                            "/sign_up.html", "/forbidden.html", "/jquery-3.6.0.min.js",
+                                                            "/logout.html", "/signup.js", "/signup/add", "/login").permitAll()
+                .antMatchers("/login_success.html").hasAnyRole(Roles.ADMIN, Roles.USER)
                 .antMatchers("/admin/**").hasAnyRole(Roles.ADMIN)
                 .antMatchers("/user/**").hasAnyRole(Roles.USER)
                 .anyRequest().authenticated()
@@ -60,7 +61,7 @@ public class ApplicationSecuretyConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public DaoAuthenticationProvider daoAuthenticationProvider(){
+    public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder(passwordEncoder);
         provider.setUserDetailsService(authservice);
