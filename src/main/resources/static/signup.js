@@ -1,8 +1,8 @@
 $(document).ready(function () {
     function addUser(user){
-        $.$.ajax({
+        $.ajax({
             type: "POST",
-            url: "/signup",
+            url: "/signup/add",
             data: JSON.stringify(user),
             contentType: 'application/json',
             success: function (response) {

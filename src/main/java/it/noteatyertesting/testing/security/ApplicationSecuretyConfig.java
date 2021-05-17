@@ -28,9 +28,10 @@ public class ApplicationSecuretyConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
 
-                .authorizeRequests().antMatchers("/", "/CSS/**", "/img/**", "/logos/**", "/videos/**",
+                .authorizeRequests().antMatchers("/", "/css/**", "/img/**", "/logos/**", "/videos/**",
                                                 "/homepage.html","/login_error.html", "/login_Page.html",
-                                                "/login_success.html","/sign_up.html","/forbidden.html").permitAll()
+                                                "/login_success.html","/sign_up.html","/forbidden.html",
+                                                "/jquery-3.6.0.min.js","/logout.html","/signup.js").permitAll()
                 .antMatchers("/admin/**").hasAnyRole(Roles.ADMIN)
                 .antMatchers("/user/**").hasAnyRole(Roles.USER)
                 .anyRequest().authenticated()
