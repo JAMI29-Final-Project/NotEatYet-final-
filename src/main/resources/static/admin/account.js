@@ -24,11 +24,11 @@ $(document).ready(function () {
     }
     getAccount();
 
-    function deleteRistorante(id) {
+    function deleteAccount(id) {
         let idPagina = $(`#riga-${id}`);
         $.ajax({
             type: "DELETE",
-            url: `ristoranti/${id}`,
+            url: `/admin/utenti/${id}`,
             success: function (response) {
                 idPagina.slideUp(300, function () {
                     idPagina.remove(); 
@@ -39,7 +39,7 @@ $(document).ready(function () {
             }
         });
       }
-      $('#listaRistoranti').on('click', '.btn-elimina-risto', function() {
+      $('#listaAccount').on('click', '.btn-eliminaAccount', function() {
         const id = $(this).attr('data-id');
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
@@ -60,16 +60,16 @@ $(document).ready(function () {
             if (result.isConfirmed) {
               swalWithBootstrapButtons.fire(
                 'Cancellato!',
-                'Il tuo Ristorante è stato Eliminato.',
+                'Account è stato Eliminato.',
                 'success'
               )
-              deleteRistorante(id);
+              deleteAccount(id);
             } else if (
               result.dismiss === Swal.DismissReason.cancel
             ) {
               swalWithBootstrapButtons.fire(
                 'Uscita',
-                'Il tuo Ristorante è salvo',
+                'Account è salvo',
                 'error'
               )
             }
