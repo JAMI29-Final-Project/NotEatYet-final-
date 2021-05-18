@@ -3,7 +3,6 @@ package it.noteatyertesting.testing.controllerDatiAdmin;
 import it.noteatyertesting.testing.auth.User;
 import it.noteatyertesting.testing.auth.UtenteCRUD;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,6 +29,7 @@ public class ControllerUtenti {
     public void modifica(@RequestBody User usermodifica) {
         User user = utenteGEST.findById(usermodifica.getId()).orElse(null);
         usermodifica.setPassword(user.getPassword());
+        usermodifica.setRuolo(user.getRuolo());
         utenteGEST.save(usermodifica);
     }
 
