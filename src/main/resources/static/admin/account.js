@@ -13,7 +13,7 @@ $(document).ready(function () {
                     <div class="btn-group" role="group">
                         <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Opzioni</button>
                             <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                <li><a class="dropdown-item btn-modificaAccount" data-bs-toggle="modal" data-bs-target="#modificaAccount" data-id='${account[i].id}'>Modifica</a></li>
+                                <li><a class="dropdown-item btn-modificaAccount" data-bs-toggle="modal" data-bs-target="#account" data-id='${account[i].id}'>Modifica</a></li>
                                 <li><a class="dropdown-item btn-eliminaAccount" data-id='${account[i].id}'>Elimina</a></li>
                             </ul>
                     </div>
@@ -78,11 +78,11 @@ $(document).ready(function () {
 
     let editMode = false;
     let idModifica = -1;
-    function modificaRistorante(ristorante) {
+    function modificaAccount(account) {
         $.ajax({
             type: "PUT",
-            url: `/admin/ristoranti`,
-            data: JSON.stringify(ristorante),
+            url: `/admin/utenti/modifica`,
+            data: JSON.stringify(account),
             contentType: 'application/json',
             dataType: 'json',
             success: function (response) {
@@ -102,28 +102,25 @@ $(document).ready(function () {
             $('#nome').val(modificaAccount.nome);
             $('#cognome').val(modificaAccount.cognome);
             $('#datadinascita').val(modificaAccount.datadinascita);
-            $('#regioneRistorante').val(modifica.regione);
-            $('#viaRistorante').val(modifica.via);
-            $('#ncivico').val(modifica.ncivico);
-            $('#modificaRistoranteTitle').text('Modifica ' + modifica.ragionesociale);
-            $('#modificaRistorante').text('Modifica ' + modifica.ragionesociale);
-            $('#title').text('Modifica ' + modifica.ragionesociale);
+            $('#email').val(modificaAccount.email);
+            $('#username').val(modificaAccount.username);
+            $('#modificaAccountTitle').text('Modifica ' + modificaAccount.nome);
+            $('#modificaAccount').text('Modifica ' + modificaAccount.nome);
         });
     });
-    $('#modificaRistorante').click(function () {
-        const ristorante = {
-            ragionesociale: $('#ragionesociale').val(),
-            piva: $('#piva').val(),
-            citta: $('#cittaRistorante').val(),
-            regione: $('#regioneRistorante').val(),
-            via: $('#viaRistorante').val(),
-            ncivico: $('#ncivico').val()            
+    $('#modificaAccount').click(function () {
+        const account = {
+            nome: $('#nome').val(),
+            cognome: $('#cognome').val(),
+            datadinascita: $('#datadinascita').val(),
+            email: $('#email').val(),
+            username: $('#username').val()         
         }
-        console.log(ristorante);
+        console.log(account);
         if (editMode) {
             Swal.fire({
                 icon: 'question',
-                title: 'Vuoi salvare la Modifica di ' + ristorante.ragionesociale + '?',
+                title: 'Vuoi salvare la Modifica di ' + account.nome + '?',
                 showDenyButton: true,
                 showCancelButton: true,
                 confirmButtonText: `Salva`,
@@ -132,10 +129,10 @@ $(document).ready(function () {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
                   Swal.fire('Salvato!', '', 'success')
-                  ristorante.id = idModifica;
-                  modificaRistorante(ristorante);
+                  account.id = idModifica;
+                  modificaAccount(account);
                   setTimeout(function () {
-                    window.location.href='ristoranti.html';
+                    window.location.href='gestione_account.html';
                   }, 2000);
                 } else if (result.isDenied) {
                   Swal.fire('Modifiche non salvate', '', 'info')
