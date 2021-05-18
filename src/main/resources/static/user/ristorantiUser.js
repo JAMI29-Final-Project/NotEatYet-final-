@@ -79,7 +79,14 @@ $(document).ready(function () {
                 <td>${listaPiatti[i].prezzo}</td>
                 <td>${listaPiatti[i].categoria.nome}</td>
                 <td>
-                    <a class="btn btn-primary btn-dettaglioPiatto text-light" data-bs-toggle="modal" data-bs-target="#dettaglioPiat" data-idLista='${listaPiatti[i].id}'>Dettaglio</a>
+                <div class="btn-group" role="group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Opzioni</button>
+                            <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                <li><a class="dropdown-item btn-dettaglioPiatto" data-bs-toggle="modal" data-bs-target="#dettaglioPiat" data-idLista='${listaPiatti[i].id}'>Dettaglio</a></li>
+                                <li><a class="dropdown-item btn-modificaPiatto" data-bs-toggle="modal" data-bs-target="#modificaPiat" data-idLista='${listaPiatti[i].id}'>Modifica</a></li>
+                                <li><a class="dropdown-item btn-eliminaPiatto" data-idLista='${listaPiatti[i].id}'>Elimina</a></li>
+                            </ul>
+                    </div>
                 </td>
             </tr>`).hide().appendTo(ristoranteListaPiatti).fadeIn(i * 150); //Gestisci i pulsanti
             }
@@ -219,11 +226,11 @@ $(document).ready(function () {
 
 
     // DETTAGLIO ELIMINA PIATTO
-   /* function detetePiatto(idPiatto) {
+    function detetePiatto(idPiatto) {
         let idPagina = $(`#riga-${idPiatto}`);
         $.ajax({
             type: "DELETE",
-            url: `piatti/elimina/${idPiatto}`,
+            url: `/user/piattiuser/elimina/${idPiatto}`,
             success: function (response) {
                 idPagina.slideUp(300, function () {
                     idPagina.remove(); 
@@ -234,7 +241,7 @@ $(document).ready(function () {
             }
         });
       }
-      $('#listaMenuDettaglio').on('click', '.btn-elimina', function() {
+      $('#listaMenuDettaglio').on('click', '.btn-eliminaPiatto', function() {
         const idPiatto = $(this).attr('data-idLista');
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
@@ -269,10 +276,10 @@ $(document).ready(function () {
               )
             }
           })
-      });*/
+      });
 
       //Lista delle categorie per la modifica del piatto
-    /*  function getCategorieSelect() {
+    function getCategorieSelect() {
         $.get('/categorieuser', function (selectCategoria) {
             const categoriaSelect = $('#selectCategorie');
             for (let i = 0; i < selectCategoria.length; i++) {
@@ -286,14 +293,14 @@ $(document).ready(function () {
     let editModePiatto = false;
     let idModificaPiatto = -1;
     let idcategoriaPiatto = -1;
-    $('#listaMenuDettaglio').on('click', '.btn-modifica', function () {
+    $('#listaMenuDettaglio').on('click', '.btn-modificaPiatto', function () {
         editModePiatto = true;
         const idModPiatto = +$(this).attr('data-idLista');
         
         idModificaPiatto = idModPiatto;
         console.log(idModificaPiatto);
         
-        $.get(`/piattiuser/piattoid/${idModificaPiatto}`, function(modifica) {
+        $.get(`/user/piattiuser/piattoid/${idModificaPiatto}`, function(modifica) {
             $('#nome').val(modifica.nome);
             $('#categoria').val(modifica.categoria.nome);
             $('#prezzo').val(modifica.prezzo);
@@ -327,7 +334,7 @@ $(document).ready(function () {
                     piatto.id = idModificaPiatto;
                     modificaPiatto(piatto);
                     setTimeout(function () {
-                        window.location.href='ristoranti.html';
+                        window.location.href='ristorantiUser.html';
                     }, 2000);
                 } else if (result.isDenied) {
                     Swal.fire('Modifiche non salvate', '', 'info')
@@ -338,7 +345,7 @@ $(document).ready(function () {
     function modificaPiatto(piatto) {
         $.ajax({
             type: "PUT",
-            url: `piatti/edit`,
+            url: `/user/piattiuser/edit/${idcategoriaPiatto}`,
             data: JSON.stringify(piatto),
             contentType: 'application/json',
             dataType: 'json',
@@ -350,9 +357,9 @@ $(document).ready(function () {
            /* error: function (error) {
                 alert("Problema nella modifica");                
                 console.log(error);
-            }*/ /*
+            }*/
         });
-    }*/
+    }
 
     // DETTAGLIO PIATTO MODALE CON INGREDIENTI
     $('#listaMenuDettaglio').on('click', '.btn-dettaglioPiatto', function () {

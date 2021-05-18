@@ -1,8 +1,9 @@
 $(document).ready(function () {
     function addRistorante(ristorante){
+        console.log(ristorante);
         $.ajax({
             type: 'POST',
-            url: 'ristoranti',
+            url: 'ristorantiuser',
             data: JSON.stringify(ristorante),
             contentType: 'application/json',
           /*  dataType: 'json', */
@@ -15,7 +16,7 @@ $(document).ready(function () {
                     timer: 1500
                 })
                 setTimeout(function () {
-                      window.location.href='ristoranti.html';
+                      window.location.href='ristorantiUser.html';
                     }, 1500);
             },
             error: function () {

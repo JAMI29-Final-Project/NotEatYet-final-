@@ -26,7 +26,7 @@ $(document).ready(function () {
         console.log(piatto);
         $.ajax({
             type: 'POST',
-            url: `/piatti/aggiungi/${idRistorante}/${idCategoria}`,
+            url: `/user/piattiuser/aggiungi/${idRistorante}/${idCategoria}`,
             data: JSON.stringify(piatto),
             contentType: 'application/json',
             dataType: 'json',
@@ -42,7 +42,7 @@ $(document).ready(function () {
                     timer: 1500
                 })
                   setTimeout(function () {
-                      window.location.href='menu.html';
+                      window.location.href='ristorantiUser.html';
                     }, 1500);
                 },
                 
@@ -56,7 +56,7 @@ $(document).ready(function () {
         })
     }
         function getCategorieSelect() {
-            $.get('/categorie', function (selectCategoria) {
+            $.get('/categorieuser', function (selectCategoria) {
                 const categoriaSelect = $('#selectCategorie');
                 for (let i = 0; i < selectCategoria.length; i++) {
                     $(`<option id='catSelect' value="${selectCategoria[i].id}">${selectCategoria[i].nome}</option>`)
@@ -67,7 +67,7 @@ $(document).ready(function () {
         getCategorieSelect();
 
         function getRistoratori() {
-            $.get('/ristoranti', function (selectRistoranti) {
+            $.get('/user/ristorantiuser', function (selectRistoranti) {
                 const ristoranteSelect = $('#ristorante');
                 console.log(selectRistoranti);
                 for (let i = 0; i < selectRistoranti.length; i++){

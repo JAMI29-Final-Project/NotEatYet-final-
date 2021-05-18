@@ -1,14 +1,14 @@
 package it.noteatyertesting.testing.controllerDatiUser;
+import it.noteatyertesting.testing.model.Categoria;
+import it.noteatyertesting.testing.model.Ingrediente;
 import it.noteatyertesting.testing.model.Piatto;
+import it.noteatyertesting.testing.model.Ristorante;
 import it.noteatyertesting.testing.repository.ICategorieCRUD;
 import it.noteatyertesting.testing.repository.IIngredientiCRUD;
 import it.noteatyertesting.testing.repository.IPiattiCRUD;
 import it.noteatyertesting.testing.repository.IRistorantiCRUD;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -52,5 +52,35 @@ public class ControllerPiattiUser {
         Piatto piatto = piattiGEST.findById(idPiatto).orElse(null);
         piatto.setIngredienti(ingredientiGEST.findIngredienteByPiattoId(piatto.getId()));
         return piatto;
+    }
+
+    @DeleteMapping("/piattiuser/elimina/{idPiatto}")
+    public void delete(@PathVariable int idPiatto){
+        Piatto piatto = piattiGEST.findById(idPiatto).orElse(null);
+        piatto.setIngredienti(ingredientiGEST.findIngredienteByPiattoId(piatto.getId()));
+        if(piatto.getIngredienti() != null){
+            for(Ingrediente ingrediente : piatto.getIngredienti()){
+                ingredientiGEST.deleteById(ingrediente.getId());
+            }
+        }
+        piattiGEST.deleteById(idPiatto);
+    }
+    // NON MODIFICA LA CATEGORIA
+    @PutMapping("/piattiuser/edit/{idCategoria}")
+    public void editPiatto( @PathVariable int idCategoria, @RequestBody Piatto piattoModifica ){
+        Piatto piatto = piattiGEST.findById(piattoModifica.getId()).orElse(null);
+        piattoModifica.setRistorante(piatto.getRistorante());
+        Categoria categoria = categorieGEST.findById(idCategoria).orElse(null);
+        piattoModifica.setCategoria(categoria);
+        piattiGEST.save(piattoModifica);
+    }
+
+    @PostMapping("/piattiuser/aggiungi/{idRistorante}/{idCategoria}")
+    public void addPiatto(@PathVariable int idRistorante, @PathVariable int idCategoria, @RequestBody Piatto piatto){
+        Categoria categoria = categorieGEST.findById(idCategoria).orElse(null);
+        Ristorante ristorante = ristorantiGEST.findById(idRistorante).orElse(null);
+        piatto.setCategoria(categoria);
+        piatto.setRistorante(ristorante);
+        piattiGEST.save(piatto);
     }
 }
