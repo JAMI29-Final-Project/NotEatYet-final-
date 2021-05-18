@@ -1,10 +1,23 @@
 $(document).ready(function () {
-    function getRistoranti() {
-        $.get('/admin/ristoranti', function (resume) {
-            const output = $('#listaRistoranti');
+    function getRistorantiUser() {
+        $.get(`/user/usersession`, function (dettaglioUser) {
+            console.log(dettaglioUser);
+            const dettaglioUserRis = $('#dettaglioUser');
+			let row = `
+            <h2 class='fw-light text-dark'><strong class="fw-bolder">Dettagli utente</strong></h2> 
+            <h4 class='fw-light text-dark'><strong class="fw-bolder">Nome: </strong>${dettaglioUser.nome}</h4> 
+            <h4 class='fw-light text-dark'><strong>Cognome: </strong>${dettaglioUser.cognome}</h4>   
+            <h4 class='fw-light text-dark'><strong>Data di Nascita: </strong>${dettaglioUser.datadinascita}</h4> 
+            <h4 class='fw-light text-dark'><strong>E-Mail: </strong>${dettaglioUser.email}</h4>
+            <h4 class='fw-light text-dark'><strong>Username: </strong>${dettaglioUser.username}</h4>
+			`;
+            $(row).hide().appendTo(dettaglioUserRis).fadeIn(500);
+		})
+        $.get('/user/ristorantiuser', function (resume) {
+            console.log(resume);
+            const listaRistorantiUser = $('#listaRistorantiUser');
             for (let i = resume.length -1; i >= 0; i--) {
                 $(`<tr id='riga-${resume[i].id}'>
-                <td>${resume[i].user.nome} ${resume[i].user.cognome}</td>
                 <td class='ragionesociale'>${resume[i].ragionesociale}</td>
                 <td class='piva'>${resume[i].piva}</td>
                 <td class='via'>${resume[i].via}</td>
@@ -20,11 +33,11 @@ $(document).ready(function () {
                             </ul>
                     </div>
                 </td>
-            </tr>`).hide().appendTo(output).fadeIn(i * 20);
+            </tr>`).hide().appendTo(listaRistorantiUser).fadeIn(i * 20);
             }
           })
     }
-    getRistoranti();
+    getRistorantiUser();
 
     $('#ristoranteDettaglioClose').click(function (){
         $('#dettaglioRis').html('');
@@ -35,12 +48,12 @@ $(document).ready(function () {
         $('#listaingre').html('');
     });
     // Dettaglio Del Ristorante
-    $('#listaRistoranti').on('click', '.btn-dettaglio', function () {
+    $('#listaRistorantiUser').on('click', '.btn-dettaglio', function () {
         const idristorante = $(this).attr('data-id');
         getRisto(idristorante);
     });
     function getRisto(idristorante) {
-        $.get(`/admin/ristoranti/${idristorante}`, function (dettaglio) {
+        $.get(`/user/ristorantiuser/${idristorante}`, function (dettaglio) {
             console.log(dettaglio);
             const dettaglioRis = $('#dettaglioRis');
             $('#title').text(dettaglio.ragionesociale + ' Nel Dettaglio');
@@ -74,7 +87,7 @@ $(document).ready(function () {
         let idPagina = $(`#riga-${id}`);
         $.ajax({
             type: "DELETE",
-            url: `ristoranti/${id}`,
+            url: `/user/ristorantiuser/${id}`,
             success: function (response) {
                 idPagina.slideUp(300, function () {
                     idPagina.remove(); 
@@ -85,7 +98,7 @@ $(document).ready(function () {
             }
         });
       }
-      $('#listaRistoranti').on('click', '.btn-elimina-risto', function() {
+      $('#listaRistorantiUser').on('click', '.btn-elimina-risto', function() {
         const id = $(this).attr('data-id');
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
@@ -128,7 +141,7 @@ $(document).ready(function () {
     function modificaRistorante(ristorante) {
         $.ajax({
             type: "PUT",
-            url: `/admin/ristoranti`,
+            url: `/user/ristoranti`,
             data: JSON.stringify(ristorante),
             contentType: 'application/json',
             dataType: 'json',
@@ -141,11 +154,11 @@ $(document).ready(function () {
             }*/
         });
     }
-    $('#listaRistoranti').on('click', '.btn-modifica-risto', function () {
+    $('#listaRistorantiUser').on('click', '.btn-modifica-risto', function () {
         editMode = true;
         const id = +$(this).attr('data-id');
         idModifica = id;
-        $.get(`/admin/ristoranti/${id}`, function(modifica) {
+        $.get(`/user/ristorantiuser/${id}`, function(modifica) {
             $('#ragionesociale').val(modifica.ragionesociale);
             $('#piva').val(modifica.piva);
             $('#cittaRistorante').val(modifica.citta);
@@ -182,7 +195,7 @@ $(document).ready(function () {
                   ristorante.id = idModifica;
                   modificaRistorante(ristorante);
                   setTimeout(function () {
-                    window.location.href='ristoranti.html';
+                    window.location.href='ristorantiUser.html';
                   }, 2000);
                 } else if (result.isDenied) {
                   Swal.fire('Modifiche non salvate', '', 'info')
