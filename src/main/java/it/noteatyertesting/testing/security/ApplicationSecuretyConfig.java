@@ -29,24 +29,25 @@ public class ApplicationSecuretyConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
 
                 .authorizeRequests().antMatchers("/", "/css/**", "/img/**", "/logos/**", "/videos/**",
-                                                            "/homepage.html", "/login_error.html", "/login_Page.html",
-                                                            "/sign_up.html", "/forbidden.html", "/jquery-3.6.0.min.js",
-                                                            "/logout.html", "/signup.js", "/signup/add", "/login").permitAll()
+                "/homepage.html", "/login_error.html", "/login_Page.html",
+                "/sign_up.html", "/forbidden.html", "/jquery-3.6.0.min.js",
+                "/logout.html", "/signup.js", "/signup/add", "/login").permitAll()
                 .antMatchers("/login_success.html").hasAnyRole(Roles.ADMIN, Roles.USER)
                 //acesso ai template Admin
                 .antMatchers("/admin/**").hasAnyRole(Roles.ADMIN)
                 //accesso controllerAdmin
                 //controllerRistoranti
-                .antMatchers("/ristoranti","/ristoranti/{id}").hasAnyRole(Roles.ADMIN)
+                .antMatchers("/ristoranti", "/ristoranti/{id}").hasAnyRole(Roles.ADMIN)
                 //controllerPiatti
-                .antMatchers("/piatti","/piatti/ristoranteid/{idRistoratore}","/piatti/piattoid/{idPiatto}",
-                                        "/piatti/aggiungi/{idRistorante}/{idCategoria}","/piatti/elimina/{idPiatto}",
-                                        "/piatti/edit/{idCategoria}").hasAnyRole(Roles.ADMIN)
+                .antMatchers("/piatti", "/piatti/ristoranteid/{idRistoratore}", "/piatti/piattoid/{idPiatto}",
+                        "/piatti/aggiungi/{idRistorante}/{idCategoria}", "/piatti/elimina/{idPiatto}",
+                        "/piatti/edit/{idCategoria}").hasAnyRole(Roles.ADMIN)
                 //controllerCategorie
                 .antMatchers("/categorie").hasAnyRole(Roles.ADMIN)
-                //controllerUtenti (fix)
-                .antMatchers("/utenti","/utenti/modifica","/utenti/{id}").hasAnyRole(Roles.ADMIN)
-                .antMatchers("/user/**","/user/ristoranti","/user/ristoranti/{via}").hasAnyRole(Roles.USER)
+                //controllerUtenti
+                .antMatchers("/utenti", "/utenti/modifica", "/utenti/{id}").hasAnyRole(Roles.ADMIN)
+                //accesso controllerUser
+                .antMatchers("/user/**", "/user/ristoranti", "/user/ristoranti/{via}").hasAnyRole(Roles.USER)
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling()

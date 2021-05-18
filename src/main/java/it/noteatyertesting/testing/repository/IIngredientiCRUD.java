@@ -11,5 +11,6 @@ import java.util.List;
 public interface IIngredientiCRUD extends JpaRepository<Ingrediente, Integer> {
 
     List<Ingrediente> findIngredienteByPiattoId(int id);
+
     void deleteIngredienteByPiattoId(int id);
 }

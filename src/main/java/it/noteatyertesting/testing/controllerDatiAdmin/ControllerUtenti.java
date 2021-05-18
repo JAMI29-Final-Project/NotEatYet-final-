@@ -15,19 +15,19 @@ public class ControllerUtenti {
     UtenteCRUD utenteGEST;
 
     @GetMapping("/utenti")
-    public List<User> elencoutenti(){
+    public List<User> elencoutenti() {
         return utenteGEST.findByRuolo("USER");
     }
 
     @PutMapping("/utenti/modifica")
-    public void modifica(@RequestBody User usermodifica){
+    public void modifica(@RequestBody User usermodifica) {
         User user = utenteGEST.findById(usermodifica.getId()).orElse(null);
         usermodifica.setPassword(user.getPassword());
         utenteGEST.save(usermodifica);
     }
 
     @DeleteMapping("/utenti/{id}")
-    public void elimina(@PathVariable int id){
+    public void elimina(@PathVariable int id) {
         utenteGEST.deleteById(id);
     }
 }

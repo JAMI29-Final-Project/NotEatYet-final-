@@ -28,12 +28,12 @@ public class Authservice implements UserDetailsService {
 
         Optional<? extends UserDetails> user = dao.findByUsername(username);
 
-        if(user.isPresent()) return user.get();
+        if (user.isPresent()) return user.get();
 
         throw new UsernameNotFoundException("Utente insesitente");
     }
 
-    public void signup (String nome, String cognome, String datadinascita, String email, String username, String password){
+    public void signup(String nome, String cognome, String datadinascita, String email, String username, String password) {
 
         User newUser = new User();
         newUser.setNome(nome);
@@ -44,9 +44,9 @@ public class Authservice implements UserDetailsService {
         newUser.setPassword(passwordEncoder.encode(password));
         newUser.setRuolo(Roles.USER);
 
-        try{
+        try {
             dao.save(newUser);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

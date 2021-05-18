@@ -18,10 +18,10 @@ public class Ristorante {
     private String via;
     private int ncivico;
     @ManyToOne
-    @JoinColumn(name="user_id", nullable=false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
     @Transient
-    private List<Piatto>menu;
+    private List<Piatto> menu;
 
     public Ristorante(int id, String ragionesociale, String piva, String regione, String citta, String via, int ncivico, User user, List<Piatto> menu) {
         this.id = id;

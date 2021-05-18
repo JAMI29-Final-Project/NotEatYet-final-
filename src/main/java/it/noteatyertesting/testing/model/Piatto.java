@@ -1,4 +1,5 @@
 package it.noteatyertesting.testing.model;
+
 import java.util.List;
 
 import javax.persistence.*;
@@ -15,10 +16,10 @@ public class Piatto {
     private String nome;
     private double prezzo;
     @ManyToOne
-    @JoinColumn(name="categoria_id", nullable=false)
+    @JoinColumn(name = "categoria_id", nullable = false)
     private Categoria categoria;
     @ManyToOne
-    @JoinColumn(name="ristorante_id", nullable=false)
+    @JoinColumn(name = "ristorante_id", nullable = false)
     @JsonIgnore
     private Ristorante ristorante;
     @Transient
@@ -38,39 +39,51 @@ public class Piatto {
     public Piatto() {
         super();
     }
+
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
+
     public String getNome() {
         return nome;
     }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
+
     public double getPrezzo() {
         return prezzo;
     }
+
     public void setPrezzo(double prezzo) {
         this.prezzo = prezzo;
     }
+
     public Categoria getCategoria() {
         return categoria;
     }
+
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
+
     public Ristorante getRistorante() {
         return ristorante;
     }
+
     public void setRistorante(Ristorante ristorante) {
         this.ristorante = ristorante;
     }
+
     public List<Ingrediente> getIngredienti() {
         return ingredienti;
     }
+
     public void setIngredienti(List<Ingrediente> ingredienti) {
         this.ingredienti = ingredienti;
     }

@@ -18,7 +18,7 @@ public class ControllerIngredienti {
     IIngredientiCRUD ingredientiGEST;
 
     @GetMapping("/ingredienti/{piattoid}")
-    List<Ingrediente> ingredienteList(@PathVariable int piattoid){
+    List<Ingrediente> ingredienteList(@PathVariable int piattoid) {
         return ingredientiGEST.findIngredienteByPiattoId(piattoid);
     }
 

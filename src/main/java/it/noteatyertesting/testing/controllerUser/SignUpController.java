@@ -19,7 +19,7 @@ public class SignUpController {
         authService.signup(nome, cognome, datadinascita, email, username, password);
     }*/
     @PostMapping("/signup/add")
-    public void singup(@RequestBody User utente){
+    public void singup(@RequestBody User utente) {
         System.out.println("sono dentro");
         authService.signup(utente.getNome(), utente.getCognome(), utente.getDatadinascita(), utente.getEmail(), utente.getUsername(), utente.getPassword());
     }

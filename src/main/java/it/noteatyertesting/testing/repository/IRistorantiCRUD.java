@@ -12,7 +12,7 @@ import java.util.List;
 public interface IRistorantiCRUD extends JpaRepository<Ristorante, Integer> {
 
     @Query(value = "select ristoranti from Ristorante ristoranti where ristoranti.via = :via")
-    Ristorante ristorante (@Param("via") String via);
+    Ristorante ristorante(@Param("via") String via);
 
     List<Ristorante> findByUserId(int userId);
 }

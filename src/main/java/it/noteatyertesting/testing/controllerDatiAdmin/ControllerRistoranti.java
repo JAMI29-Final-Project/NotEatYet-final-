@@ -30,16 +30,16 @@ public class ControllerRistoranti {
     IIngredientiCRUD ingredientiGEST;
 
     @GetMapping("/ristoranti")
-        public List<Ristorante> getAll() {
+    public List<Ristorante> getAll() {
 
-            return ristorantiGEST.findAll();
-        }
+        return ristorantiGEST.findAll();
+    }
 
-        @GetMapping("/ristoranti/{id}")
-        public Ristorante getOne(@PathVariable int id) {
+    @GetMapping("/ristoranti/{id}")
+    public Ristorante getOne(@PathVariable int id) {
         Ristorante ristorante = ristorantiGEST.findById(id).orElse(null);
         ristorante.setMenu(piattiGEST.findPiattoByRistoranteId(id));
-        for(Piatto piatto : ristorante.getMenu()){
+        for (Piatto piatto : ristorante.getMenu()) {
             piatto.setIngredienti(ingredientiGEST.findIngredienteByPiattoId(piatto.getId()));
         }
         return ristorante;
@@ -56,15 +56,16 @@ public class ControllerRistoranti {
         Ristorante ristorante = getOne(id);
 
         for (Piatto piattodel : ristorante.getMenu()) {
-            for(Ingrediente ingrediente : piattodel.getIngredienti()) {
+            for (Ingrediente ingrediente : piattodel.getIngredienti()) {
                 ingredientiGEST.deleteById(ingrediente.getId());
             }
             piattiGEST.deleteById(piattodel.getId());
         }
         ristorantiGEST.deleteById(ristorante.getId());
     }
+
     @PutMapping("/ristoranti")
-    public void editRistorant(@RequestBody Ristorante ristoranteedit){
+    public void editRistorant(@RequestBody Ristorante ristoranteedit) {
         Ristorante ristorante = ristorantiGEST.findById(ristoranteedit.getId()).orElse(null);
         ristoranteedit.setUser(ristorante.getUser());
         ristorantiGEST.save(ristoranteedit);

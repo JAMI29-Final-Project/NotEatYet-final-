@@ -3,6 +3,7 @@ package it.noteatyertesting.testing.controllerDatiAdmin;
 
 //import it.noteatyertesting.testing.model.Categoria;
 //import it.noteatyertesting.testing.model.Ingrediente;
+
 import it.noteatyertesting.testing.model.Piatto;
 //import it.noteatyertesting.testing.model.Ristorante;
 import it.noteatyertesting.testing.repository.ICategorieCRUD;
@@ -19,8 +20,8 @@ import java.util.List;
 public class ControllerPiatti {
 
     /*
-    *PIATTI OK review by EDOARDO CAROLLO
-    */
+     *PIATTI OK review by EDOARDO CAROLLO
+     */
 
     //interfaccia che gestisce le chiamate della tabella Ristoranti
     @Autowired
@@ -39,14 +40,14 @@ public class ControllerPiatti {
     IIngredientiCRUD ingredientiGEST;
 
     @GetMapping("/piatti")
-    public List<Piatto> getAll(){
+    public List<Piatto> getAll() {
         return piattiGEST.findAll();
     }
 
     @GetMapping("/piatti/ristoranteid/{idRistoratore}")
-    public List<Piatto> piatti (@PathVariable int idRistoratore){
-        List <Piatto> piatti = piattiGEST.findPiattoByRistoranteId(idRistoratore);
-        for(Piatto piatto : piatti){
+    public List<Piatto> piatti(@PathVariable int idRistoratore) {
+        List<Piatto> piatti = piattiGEST.findPiattoByRistoranteId(idRistoratore);
+        for (Piatto piatto : piatti) {
             piatto.setIngredienti(ingredientiGEST.findIngredienteByPiattoId(piatto.getId()));
         }
 
@@ -55,7 +56,7 @@ public class ControllerPiatti {
     }
 
     @GetMapping("/piatti/piattoid/{idPiatto}")
-    public Piatto piatto (@PathVariable int idPiatto){
+    public Piatto piatto(@PathVariable int idPiatto) {
         Piatto piatto = piattiGEST.findById(idPiatto).orElse(null);
         piatto.setIngredienti(ingredientiGEST.findIngredienteByPiattoId(piatto.getId()));
         return piatto;

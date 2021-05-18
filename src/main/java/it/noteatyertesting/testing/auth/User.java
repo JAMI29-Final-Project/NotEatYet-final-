@@ -19,9 +19,9 @@ public class User implements UserDetails {
     private static final Map<String, Collection<? extends GrantedAuthority>> AUTHORITIES = new HashMap<>();
 
     {
-        AUTHORITIES.put(Roles.ADMIN, Arrays.asList(new GrantedAuthority[] { new SimpleGrantedAuthority("ROLE_ADMIN"),
-                new SimpleGrantedAuthority("management"), }));
-        AUTHORITIES.put(Roles.USER, Arrays.asList(new GrantedAuthority[] { new SimpleGrantedAuthority("ROLE_USER") }));
+        AUTHORITIES.put(Roles.ADMIN, Arrays.asList(new GrantedAuthority[]{new SimpleGrantedAuthority("ROLE_ADMIN"),
+                new SimpleGrantedAuthority("management"),}));
+        AUTHORITIES.put(Roles.USER, Arrays.asList(new GrantedAuthority[]{new SimpleGrantedAuthority("ROLE_USER")}));
 
     }
 
@@ -55,7 +55,6 @@ public class User implements UserDetails {
         this.datadinascita = datadinascita;
         this.ruolo = ruolo;
     }
-
 
 
     public int getId() {
