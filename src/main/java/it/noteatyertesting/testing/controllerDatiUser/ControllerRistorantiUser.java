@@ -15,6 +15,7 @@ import java.security.Principal;
 import java.util.List;
 
 @RestController
+@RequestMapping("user")
 public class ControllerRistorantiUser {
 
     @Autowired
@@ -32,7 +33,7 @@ public class ControllerRistorantiUser {
     @Autowired
     IIngredientiCRUD ingredientiGEST;
 
-    @GetMapping("/user/ristoranti")
+    @GetMapping("/ristorantiuser")
     List<Ristorante>  elenco(Principal principal){
         String username = principal.getName();
         User utente = (User) daoUser.findByUsername(username).orElse(null);
@@ -40,7 +41,7 @@ public class ControllerRistorantiUser {
         return ristorantiGEST.findByUserId(utente.getId());
     }
 
-    @GetMapping("/user/ristoranti/{id}")
+    @GetMapping("/ristorantiuser/{id}")
     public Ristorante getOne(@PathVariable int id) {
         Ristorante ristorante = ristorantiGEST.findById(id).orElse(null);
         ristorante.setMenu(piattiGEST.findPiattoByRistoranteId(id));
@@ -49,12 +50,12 @@ public class ControllerRistorantiUser {
         }
         return ristorante;
     }
-    @PostMapping("/user/ristoranti")
+    @PostMapping("/ristorantiuser")
     public void addResturant(@RequestBody Ristorante ristorante) {
         ristorantiGEST.save(ristorante);
     }
 
-    @DeleteMapping("/user/ristoranti/{id}")
+    @DeleteMapping("/ristorantiuser/{id}")
     public void deleteResturant(@PathVariable int id) {
 
         Ristorante ristorante = getOne(id);
