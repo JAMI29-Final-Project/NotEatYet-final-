@@ -19,7 +19,7 @@ public class ControllerUtenti {
         return utenteGEST.findByRuolo("USER");
     }
 
-    @PutMapping("/modifica")
+    @PutMapping("/utenti/modifica")
     public void modifica(@RequestBody User usermodifica){
         User user = utenteGEST.findById(usermodifica.getId()).orElse(null);
         usermodifica.setPassword(user.getPassword());
