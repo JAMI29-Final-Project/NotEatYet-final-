@@ -1,5 +1,4 @@
 package it.noteatyertesting.testing.controllerDatiUser;
-
 import it.noteatyertesting.testing.model.Piatto;
 import it.noteatyertesting.testing.repository.ICategorieCRUD;
 import it.noteatyertesting.testing.repository.IIngredientiCRUD;
@@ -29,7 +28,8 @@ public class ControllerPiattiUser {
     @Autowired
     ICategorieCRUD categorieGEST;
 
-    //interfaccia che gestisce le chiamate della tabella Ingredienti
+    //interfaccia che gestisce le chiamate della tabella Ingredienti //provva
+
     @Autowired
     IIngredientiCRUD ingredientiGEST;
 
@@ -46,6 +46,7 @@ public class ControllerPiattiUser {
         }
         return piatti;
     }
+
     @GetMapping("/piattiuser/piattoid/{idPiatto}")
     public Piatto piatto(@PathVariable int idPiatto) {
         Piatto piatto = piattiGEST.findById(idPiatto).orElse(null);
