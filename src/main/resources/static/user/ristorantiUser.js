@@ -67,7 +67,7 @@ $(document).ready(function () {
 			`;
             $(row).hide().appendTo(dettaglioRis).fadeIn(500);
 		})
-        $.get(`/admin/piatti/ristoranteid/${idristorante}`, function(listaPiatti) {
+        $.get(`/user/piattiuser/ristoranteid/${idristorante}`, function(listaPiatti) {
             const ristoranteListaPiatti = $('#listaMenuDettaglio');
             for (let i = listaPiatti.length -1; i >= 0; i--) {
                 $(`<tr id='riga-${listaPiatti[i].id}'>
@@ -141,7 +141,7 @@ $(document).ready(function () {
     function modificaRistorante(ristorante) {
         $.ajax({
             type: "PUT",
-            url: `/user/ristoranti`,
+            url: `/user/ristorantiuser`,
             data: JSON.stringify(ristorante),
             contentType: 'application/json',
             dataType: 'json',
@@ -269,7 +269,7 @@ $(document).ready(function () {
 
       //DETTAGLIO MODIFICA PIATTO
       function getCategorieSelect() {
-        $.get('/categorie', function (selectCategoria) {
+        $.get('/categorieuser', function (selectCategoria) {
             const categoriaSelect = $('#selectCategorie');
             for (let i = 0; i < selectCategoria.length; i++) {
                 $(`<option id='catSelect' value="${selectCategoria[i].id}">${selectCategoria[i].nome}</option>`)
@@ -289,7 +289,7 @@ $(document).ready(function () {
         idModificaPiatto = idModPiatto;
         console.log(idModificaPiatto);
         
-        $.get(`/piatti/piattoid/${idModificaPiatto}`, function(modifica) {
+        $.get(`/piattiuser/piattoid/${idModificaPiatto}`, function(modifica) {
             $('#nome').val(modifica.nome);
             $('#categoria').val(modifica.categoria.nome);
             $('#prezzo').val(modifica.prezzo);
@@ -350,13 +350,13 @@ $(document).ready(function () {
         });
     }
 
-    // DETTAGLIO PIATTO
+    // DETTAGLIO PIATTO MODALE CON INGREDIENTI
     $('#listaMenuDettaglio').on('click', '.btn-dettaglioPiatto', function () {
         const idDetPiatto = $(this).attr('data-idLista');
         getPiatto(idDetPiatto);
     });
     function getPiatto(idDetPiatto) {
-        $.get(`piatti/piattoid/${idDetPiatto}`, function (dettaglio) {
+        $.get(`piattiuser/piattoid/${idDetPiatto}`, function (dettaglio) {
             const dettaglioPiatto = $('#dettaglioPiatto');
             $('#titlePiatto').text(dettaglio.nome + ' Nel Dettaglio');
 			let row = `
@@ -368,7 +368,7 @@ $(document).ready(function () {
             $(row).hide().appendTo(dettaglioPiatto).fadeIn(500);
 		})
         
-        $.get(`/admin/ingredienti/${idDetPiatto}`, function (ingredienti) {
+        $.get(`/user/ingredientiuser/${idDetPiatto}`, function (ingredienti) {
             const listaingredienti = $('#listaingre');
             console.log(ingredienti);
             if (ingredienti.length == 0){
