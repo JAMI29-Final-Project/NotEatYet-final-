@@ -18,10 +18,6 @@ public class ControllerUtenti {
     @GetMapping("/utenti")
     public List<User> elencoutenti() {
         List <User> elenco = utenteGEST.findByRuolo("USER");
-//        for (User user : elenco){
-//            String password = PasswordEncoder
-//
-//        }
         return elenco;
     }
 
