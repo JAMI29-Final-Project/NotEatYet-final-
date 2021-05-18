@@ -1,4 +1,6 @@
 $(document).ready(function () {
+
+    // Lista Ristoranti completa
     function getRistoranti() {
         $.get('/admin/ristoranti', function (resume) {
             const output = $('#listaRistoranti');
@@ -26,6 +28,7 @@ $(document).ready(function () {
     }
     getRistoranti();
 
+    // Svuoto Modale dopo la chiusura
     $('#ristoranteDettaglioClose').click(function (){
         $('#dettaglioRis').html('');
         $('#listaMenuDettaglio').html('');
@@ -34,7 +37,8 @@ $(document).ready(function () {
         $('#dettaglioPiatto').html('');
         $('#listaingre').html('');
     });
-    // Dettaglio Del Ristorante
+
+    // Dettaglio Del Ristorante con lista piatti nel modale1
     $('#listaRistoranti').on('click', '.btn-dettaglio', function () {
         const idristorante = $(this).attr('data-id');
         getRisto(idristorante);
@@ -69,7 +73,7 @@ $(document).ready(function () {
         })
 	} 
     
-
+    // Cancellazione ristorante
     function deleteRistorante(id) {
         let idPagina = $(`#riga-${id}`);
         $.ajax({
@@ -122,7 +126,7 @@ $(document).ready(function () {
           })
       });
 
-    
+    // Modifica Ristorante
     let editMode = false;
     let idModifica = -1;
     function modificaRistorante(ristorante) {
@@ -202,7 +206,7 @@ $(document).ready(function () {
 
 
     // DETTAGLIO ELIMINA PIATTO
-    function detetePiatto(idPiatto) {
+   /* function detetePiatto(idPiatto) {
         let idPagina = $(`#riga-${idPiatto}`);
         $.ajax({
             type: "DELETE",
@@ -333,11 +337,11 @@ $(document).ready(function () {
            /* error: function (error) {
                 alert("Problema nella modifica");                
                 console.log(error);
-            }*/
+            }*/ /*
         });
-    }
+    } */
 
-    // DETTAGLIO PIATTO
+    // DETTAGLIO PIATTO Modale2
     $('#listaMenuDettaglio').on('click', '.btn-dettaglioPiatto', function () {
         const idDetPiatto = $(this).attr('data-idLista');
         getPiatto(idDetPiatto);
