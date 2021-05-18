@@ -74,9 +74,10 @@ public class ControllerRistorantiUser {
         }
         ristorantiGEST.deleteById(ristorante.getId());
     }
-    @PutMapping("/user/modifica/ristoranti")
+    @PutMapping("/ristorantiuser")
     public void editRistorant(@RequestBody Ristorante ristoranteedit){
-        System.out.println("ciao + " + ristoranteedit.toString());
+        Ristorante ristorante = ristorantiGEST.findById(ristoranteedit.getId()).orElse(null);
+        ristoranteedit.setUser(ristorante.getUser());
         ristorantiGEST.save(ristoranteedit);
     }
 
