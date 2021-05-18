@@ -1,8 +1,10 @@
 $(document).ready(function () {
+    // RistorantiUser.html Lista Ristoranti con dettagli utente
     function getRistorantiUser() {
         $.get(`/user/usersession`, function (dettaglioUser) {
             console.log(dettaglioUser);
             const dettaglioUserRis = $('#dettaglioUser');
+            $('#titleAccount').text('Ristoranti di ' + dettaglioUser.nome);
 			let row = `
             <h2 class='fw-light text-dark'><strong class="fw-bolder">Dettagli utente</strong></h2> 
             <h4 class='fw-light text-dark'><strong class="fw-bolder">Nome: </strong>${dettaglioUser.nome}</h4> 
@@ -39,6 +41,7 @@ $(document).ready(function () {
     }
     getRistorantiUser();
 
+    // Svuota i 2 modali al click del pulsante close
     $('#ristoranteDettaglioClose').click(function (){
         $('#dettaglioRis').html('');
         $('#listaMenuDettaglio').html('');
@@ -47,7 +50,8 @@ $(document).ready(function () {
         $('#dettaglioPiatto').html('');
         $('#listaingre').html('');
     });
-    // Dettaglio Del Ristorante
+
+    // Dettaglio Del Ristorante nella lista principale con la lista dei piatti
     $('#listaRistorantiUser').on('click', '.btn-dettaglio', function () {
         const idristorante = $(this).attr('data-id');
         getRisto(idristorante);
@@ -82,7 +86,7 @@ $(document).ready(function () {
         })
 	} 
     
-
+    // Cancella un ristorante dalla lista principale
     function deleteRistorante(id) {
         let idPagina = $(`#riga-${id}`);
         $.ajax({
@@ -135,7 +139,7 @@ $(document).ready(function () {
           })
       });
 
-    
+    //Modifica un ristorante dalla lista principale
     let editMode = false;
     let idModifica = -1;
     function modificaRistorante(ristorante) {
@@ -207,7 +211,7 @@ $(document).ready(function () {
     // Barra di Ricerca
     $ ("#ricercaRistoranti").on("keyup",function(){
         var value = $(this).val().toLowerCase();
-        $("#listaRistoranti tr").filter (function(){
+        $("#listaRistorantiUser tr").filter (function(){
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1 )
         } );
     });
@@ -215,7 +219,7 @@ $(document).ready(function () {
 
 
     // DETTAGLIO ELIMINA PIATTO
-    function detetePiatto(idPiatto) {
+   /* function detetePiatto(idPiatto) {
         let idPagina = $(`#riga-${idPiatto}`);
         $.ajax({
             type: "DELETE",
@@ -265,10 +269,10 @@ $(document).ready(function () {
               )
             }
           })
-      });
+      });*/
 
-      //DETTAGLIO MODIFICA PIATTO
-      function getCategorieSelect() {
+      //Lista delle categorie per la modifica del piatto
+    /*  function getCategorieSelect() {
         $.get('/categorieuser', function (selectCategoria) {
             const categoriaSelect = $('#selectCategorie');
             for (let i = 0; i < selectCategoria.length; i++) {
@@ -346,9 +350,9 @@ $(document).ready(function () {
            /* error: function (error) {
                 alert("Problema nella modifica");                
                 console.log(error);
-            }*/
+            }*/ /*
         });
-    }
+    }*/
 
     // DETTAGLIO PIATTO MODALE CON INGREDIENTI
     $('#listaMenuDettaglio').on('click', '.btn-dettaglioPiatto', function () {
