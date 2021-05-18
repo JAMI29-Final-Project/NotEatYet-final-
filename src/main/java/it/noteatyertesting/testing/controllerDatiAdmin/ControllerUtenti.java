@@ -3,6 +3,7 @@ package it.noteatyertesting.testing.controllerDatiAdmin;
 import it.noteatyertesting.testing.auth.User;
 import it.noteatyertesting.testing.auth.UtenteCRUD;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +17,17 @@ public class ControllerUtenti {
 
     @GetMapping("/utenti")
     public List<User> elencoutenti() {
-        return utenteGEST.findByRuolo("USER");
+        List <User> elenco = utenteGEST.findByRuolo("USER");
+//        for (User user : elenco){
+//            String password = PasswordEncoder
+//
+//        }
+        return elenco;
+    }
+
+    @GetMapping("/utenti/{id}")
+    User user (@PathVariable int id){
+        return utenteGEST.findById(id).orElse(null);
     }
 
     @PutMapping("/utenti/modifica")
