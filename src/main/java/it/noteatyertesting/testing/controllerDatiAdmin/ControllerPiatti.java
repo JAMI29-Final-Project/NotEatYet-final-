@@ -56,7 +56,6 @@ public class ControllerPiatti {
 
     @GetMapping("/piatti/piattoid/{idPiatto}")
     public Piatto piatto (@PathVariable int idPiatto){
-        System.out.println(idPiatto +"");
         Piatto piatto = piattiGEST.findById(idPiatto).orElse(null);
         piatto.setIngredienti(ingredientiGEST.findIngredienteByPiattoId(piatto.getId()));
         return piatto;
