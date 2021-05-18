@@ -50,7 +50,7 @@ public class ApplicationSecuretyConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/**").hasAnyRole(Roles.USER)
                 //accesso controller User
                 //accesso controller ristorantiUser
-                .antMatchers("/ristorantiuser", "/ristorantiuser/{id}").hasAnyRole(Roles.USER)
+                .antMatchers("/ristorantiuser", "/ristorantiuser/{id}","/usersession").hasAnyRole(Roles.USER)
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling()

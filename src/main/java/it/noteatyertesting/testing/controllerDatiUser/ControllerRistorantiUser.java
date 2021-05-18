@@ -15,7 +15,7 @@ import java.security.Principal;
 import java.util.List;
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("/user")
 public class ControllerRistorantiUser {
 
     @Autowired
@@ -32,6 +32,12 @@ public class ControllerRistorantiUser {
     //interfaccia che gestisce le chiamate della tabella Ingredienti
     @Autowired
     IIngredientiCRUD ingredientiGEST;
+
+    @GetMapping("/usersession")
+    User user (Principal principal){
+        String nome = principal.getName();
+        return (User) daoUser.findByUsername(nome).orElse(null);
+    }
 
     @GetMapping("/ristorantiuser")
     List<Ristorante>  elenco(Principal principal){
