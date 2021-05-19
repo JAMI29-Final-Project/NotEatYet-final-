@@ -318,7 +318,7 @@ $(document).ready(function () {
                 id: $('#selectCategorie').val(),
             }           
         }
-        const idcatPiat = $('#catSelect').val();
+        const idcatPiat = $('#selectCategorie').val();
         idcategoriaPiatto = idcatPiat;
         if (editModePiatto) {
             Swal.fire({
