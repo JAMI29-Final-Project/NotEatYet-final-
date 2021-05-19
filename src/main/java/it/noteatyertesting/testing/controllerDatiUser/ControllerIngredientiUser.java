@@ -23,21 +23,18 @@ public class ControllerIngredientiUser {
     List<Ingrediente> ingredienteList(@PathVariable int piattoid) {
         return ingredientiGEST.findIngredienteByPiattoId(piattoid);
     }
-
     @PostMapping("ingredientiuser/aggiungi/{idPiatto}")
     public void addIngredientiAPiatto(@PathVariable int idPiatto, @RequestParam String ingredienti) {
         Piatto p = piattiGEST.findById(idPiatto).orElse(null);
         Ingrediente ingrediente = new Ingrediente(ingredienti,p);
         ingredientiGEST.save(ingrediente);
     }
-
     @DeleteMapping("ingredientiuser/elimina/{idIngrediente}")
-    public void elimina (@PathVariable int id){
-        ingredientiGEST.deleteById(id);
+    public void elimina (@PathVariable int idIngrediente){
+        ingredientiGEST.deleteById(idIngrediente);
     }
     @PutMapping("/ingredientiuser/modifica")
     public void modifica (@RequestBody Ingrediente ingrediente){
         ingredientiGEST.save(ingrediente);
     }
-
 }
