@@ -97,11 +97,12 @@
                                           <select class="form-select" id="ristorante" aria-label="Default select example">
                                           </select>
                                           </div>
-                                        <label for='floatingTextarea' class='form-label'>Lista ingredienti</label>
-                                        <div class="form-floating"> 
-                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 100px"></textarea>
-                                            <label for="floatingTextarea">Inserire gli Ingredienti con la virgola</label>
-                                          </div>
+                                          <label for='ingredienti' class='form-label'>Lista Ingredienti</label> 
+                                            <div class='input-group mb-3'>
+                                                <input type='text' id='ingredienti' class='form-control' placeholder="Inserire Ingredienti..." required>
+                                                <button class='btn btn-primary float-end' id="aggiungiIngrediente">Aggiungi Ingrediente</button>
+                                              </div>
+                                          <ol class="list-group" id="listaIngredienti"></ol>
                                           <br>
                                             <button class='btn btn-primary float-end' id="aggiungiPiatto">Aggiungi</button>  
                                         </div>

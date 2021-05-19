@@ -1,12 +1,11 @@
 package it.noteatyertesting.testing.controllerDatiUser;
 
 import it.noteatyertesting.testing.model.Ingrediente;
+import it.noteatyertesting.testing.model.Piatto;
 import it.noteatyertesting.testing.repository.IIngredientiCRUD;
+import it.noteatyertesting.testing.repository.IPiattiCRUD;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,8 +16,19 @@ public class ControllerIngredientiUser {
     @Autowired
     IIngredientiCRUD ingredientiGEST;
 
+    @Autowired
+    IPiattiCRUD piattiGEST;
+
     @GetMapping("/ingredientiuser/{piattoid}")
     List<Ingrediente> ingredienteList(@PathVariable int piattoid) {
         return ingredientiGEST.findIngredienteByPiattoId(piattoid);
+    }
+
+    @PostMapping("ingredientiuser/aggiungi/{idPiatto}")
+    public void addIngredientiAPiatto(@PathVariable int idPiatto, @RequestBody Ingrediente ingrediente) {
+        Piatto p = piattiGEST.findById(idPiatto).orElse(null);
+        ingrediente.setPiatto(p);
+        ingredientiGEST.save(ingrediente);
+
     }
 }
