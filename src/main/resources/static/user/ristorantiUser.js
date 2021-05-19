@@ -27,7 +27,7 @@ $(document).ready(function () {
                 <td class='regione'>${resume[i].regione}</td>
                 <td>
                     <div class="btn-group" role="group">
-                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Opzioni</button>
+                        <button id="btnGroupDrop1" type="button" class="btn bg-yellow text-btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Opzioni</button>
                             <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                                 <li><a class="dropdown-item btn-dettaglio" data-bs-toggle="modal" data-bs-target="#dettaglio" data-id='${resume[i].id}'>Dettaglio</a></li>
                                 <li><a class="dropdown-item btn-modifica-risto" data-bs-toggle="modal" data-bs-target="#modifica" data-id='${resume[i].id}'>Modifica</a></li>
@@ -50,6 +50,10 @@ $(document).ready(function () {
     $('#listaDettaglioClose').click(function () {
         $('#dettaglioPiatto').html('');
         $('#listaingre').html('');
+    });
+    $('#ristoranteModificaClose').click(function () {
+        $('#listaModificaIngrediente').html('');
+        $('#listaIngredientiModifica').html('');
     });
 
     // Dettaglio Del Ristorante nella lista principale con la lista dei piatti
@@ -82,7 +86,7 @@ $(document).ready(function () {
                 <td>${listaPiatti[i].categoria.nome}</td>
                 <td>
                 <div class="btn-group" role="group">
-                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Opzioni</button>
+                        <button id="btnGroupDrop1" type="button" class="btn bg-yellow text-btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Opzioni</button>
                             <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                                 <li><a class="dropdown-item btn-dettaglioPiatto" data-bs-toggle="modal" data-bs-target="#dettaglioPiat" data-idLista='${listaPiatti[i].id}'>Dettaglio</a></li>
                                 <li><a class="dropdown-item btn-modificaPiatto" data-bs-toggle="modal" data-bs-target="#modificaPiat" data-idLista='${listaPiatti[i].id}'>Modifica</a></li>
@@ -90,7 +94,7 @@ $(document).ready(function () {
                             </ul>
                     </div>
                 </td>
-            </tr>`).hide().appendTo(ristoranteListaPiatti).fadeIn(i * 150); //Gestisci i pulsanti
+            </tr>`).hide().appendTo(ristoranteListaPiatti).fadeIn(i * 20); //Gestisci i pulsanti
             }
         })
     }
@@ -320,8 +324,8 @@ $(document).ready(function () {
             const listaIngredientiUser = $('#listaIngredientiModifica');
             for (let i = 0; i < resume.length; i++) {
                 $(`<div class='input-group mb-3' id='riga-${resume[i].id}'>
-                <input type='text' id='ingredienti` + i + `' data-idLet='${resume[i].id}' class='form-control' placeholder="Inserire Ingredienti da modificare..." required>
-                    <button class='btn btn-outline-secondary' type="button" id="eliminaIngrediente" data-idLet='${resume[i].id}'>Elimina</button>
+                <input type='text' id='ingredienti` + i + `' data-idLet='${resume[i].id}' class='form-control' placeholder="Inserire Ingredienti da modificare..." required readonly>
+                    <button class='btn btn-outline-danger' type="button" id="eliminaIngrediente" data-idLet='${resume[i].id}'>Elimina</button>
                     </div>
                     `).appendTo(listaIngredientiUser);
                 $('#ingredienti' + i).val(resume[i].nome);
@@ -331,10 +335,10 @@ $(document).ready(function () {
 
     //MODIFICA PIATTO
     $('#modificaPiatto').click(function (ingredienti) {
-        console.log("Ingre " + ingredienti)
-        const ingre = null;
+       // console.log("Ingre " + ingredienti)
+      //  const ingre = null;
         //Prendo valore ingredienti
-        for (let i = 0; i < ingredienti.length; i++) {
+      /*  for (let i = 0; i < ingredienti.length; i++) {
             const idModIng = +$(this).attr('data-idLet');
             console.log("ID Ingr" + idModIng);
             ingre = {
@@ -344,7 +348,7 @@ $(document).ready(function () {
                 }
             }
             console.log("Lista" + ingre);
-        }
+        }*/
         const piatto = {
             id: idModificaPiatto,
             nome: $('#nome').val(),
@@ -368,7 +372,7 @@ $(document).ready(function () {
                     Swal.fire('Salvato!', '', 'success')
                     piatto.id = idModificaPiatto;
                     modificaPiatto(piatto);
-                    modificaIngrediente(ingre);
+                   // modificaIngrediente(ingre);
                     setTimeout(function () {
                         window.location.href = 'ristorantiUser.html';
                     }, 2000);
@@ -397,8 +401,8 @@ $(document).ready(function () {
              }*/
         });
     }
-
-    function modificaIngrediente(ingre) {
+    // NON FUNZIONA
+   /* function modificaIngrediente(ingre) {
         $.ajax({
             type: "PUT",
             url: `/user/ingredientiuser/modifica/`,
@@ -413,7 +417,7 @@ $(document).ready(function () {
                 console.log(error);
             }
         });
-    }
+    }*/
 
     // ELIMINA INGREDIENTE
     $('#listaIngredientiModifica').on('click', '#eliminaIngrediente', function () {
@@ -444,7 +448,7 @@ $(document).ready(function () {
         $('#inputAggiungiIngrediente').append(`
         <div class='input-group mb-3'>
         <input type='text' id='ingredientiModifica' class='form-control' placeholder="Inserire Ingredienti..." required>
-        <button class='btn btn-primary float-end' id="aggiungiIngredientebtn">Aggiungi Ingrediente</button>
+        <button class='btn btn-outline-warning text-btn float-end' id="aggiungiIngredientebtn">Aggiungi Ingrediente</button>
         </div>
         <ol class="list-group" id="listaModificaIngredienti"></ol>`);
         $('#aggiungiIngredienteModale').remove();
@@ -467,7 +471,7 @@ $(document).ready(function () {
             const ingrediente = {
                 "nome": nome
             };
-            $(this).parent().remove();
+            $('#eliminaIngrediente').remove();
             const indiceIngrediente = vettoreIngredienti1.indexOf(ingrediente);
             vettoreIngredienti1.splice(indiceIngrediente, 1);
         });

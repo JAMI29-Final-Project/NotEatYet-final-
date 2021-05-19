@@ -21,7 +21,7 @@ $(document).ready(function () {
         const ingrediente = {
             "nome": nome
         };
-        $(this).parent().remove();
+        $('#eliminaIngrediente').remove();
         const indiceIngrediente = vettoreIngredienti1.indexOf(ingrediente);
         vettoreIngredienti1.splice(indiceIngrediente, 1);
     });
