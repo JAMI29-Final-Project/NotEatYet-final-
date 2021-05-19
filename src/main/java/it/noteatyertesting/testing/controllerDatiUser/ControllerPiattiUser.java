@@ -65,7 +65,7 @@ public class ControllerPiattiUser {
         }
         piattiGEST.deleteById(idPiatto);
     }
-    // NON MODIFICA LA CATEGORIA
+
     @PutMapping("/piattiuser/edit/{idCategoria}")
     public void editPiatto( @PathVariable int idCategoria, @RequestBody Piatto piattoModifica ){
         Piatto piatto = piattiGEST.findById(piattoModifica.getId()).orElse(null);

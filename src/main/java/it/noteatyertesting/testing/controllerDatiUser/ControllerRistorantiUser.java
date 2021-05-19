@@ -57,7 +57,10 @@ public class ControllerRistorantiUser {
         return ristorante;
     }
     @PostMapping("/ristorantiuser")
-    public void addResturant(@RequestBody Ristorante ristorante) {
+    public void addResturant(Principal principal ,@RequestBody Ristorante ristorante) {
+        String username = principal.getName();
+        User utente = (User) daoUser.findByUsername(username).orElse(null);
+        ristorante.setUser(utente);
         ristorantiGEST.save(ristorante);
     }
 

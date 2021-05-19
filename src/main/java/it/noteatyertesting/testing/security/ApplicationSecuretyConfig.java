@@ -51,6 +51,7 @@ public class ApplicationSecuretyConfig extends WebSecurityConfigurerAdapter {
                 //accesso controller User
                 //accesso controller ristorantiUser
                 .antMatchers("/ristorantiuser", "/ristorantiuser/{id}","/usersession").hasAnyRole(Roles.USER)
+                //controller user Piatti
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling()
