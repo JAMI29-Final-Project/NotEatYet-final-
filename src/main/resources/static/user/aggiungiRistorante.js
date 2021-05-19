@@ -8,6 +8,8 @@ $(document).ready(function () {
             contentType: 'application/json',
           /*  dataType: 'json', */
             success: function(success){
+                console.log("Sono in success " + success);
+                console.log("ID success "+ ristorante.id);
                 Swal.fire({
                     icon: 'success',
                     title: 'INSERITO!',

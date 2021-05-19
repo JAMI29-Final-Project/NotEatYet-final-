@@ -77,6 +77,9 @@ public class ControllerPiattiUser {
 
     @PostMapping("/piattiuser/aggiungi/{idRistorante}/{idCategoria}")
     public void addPiatto(@PathVariable int idRistorante, @PathVariable int idCategoria, @RequestBody Piatto piatto , @RequestParam String[]nome){
+        for (String ingrediente : nome) {
+            System.out.println(ingrediente);
+        }
         Categoria categoria = categorieGEST.findById(idCategoria).orElse(null);
         Ristorante ristorante = ristorantiGEST.findById(idRistorante).orElse(null);
         piatto.setCategoria(categoria);

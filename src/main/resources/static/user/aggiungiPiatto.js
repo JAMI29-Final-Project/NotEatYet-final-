@@ -6,14 +6,12 @@ $(document).ready(function () {
     $('#aggiungiIngrediente').click(function() {
         const input = $('input#ingredienti');
         const valore = input.val();
-        const ingrediente = {
-            "nome": valore
-        };
-        console.log(ingrediente);
+        
         if (valore) {
-            vettoreIngredienti1.push(ingrediente);
+            vettoreIngredienti1.push(valore);
             $('#listaIngredienti').append(`
-            <a class="list-group-item list-group-item-action list-group-item-warning" id="eliminaIngrediente">${ingrediente.nome}</a>`);
+            <a class="list-group-item list-group-item-action list-group-item-warning" id="eliminaIngrediente">${valore}</a>`);
+            console.log("Sono nel Vettore" + vettoreIngredienti1);
         }
         input.val('');
         input.focus();
@@ -41,20 +39,20 @@ $(document).ready(function () {
         }
         let ingredienti = [];
         vettoreIngredienti1.forEach(ingrediente => ingredienti.push(ingrediente));
-        const piattoIngre = {ingredienti};
+        let piattoIngre = vettoreIngredienti1;
         idCategoria = piatto.categoria.id;
         idRistorante = piatto.ristorante.id;
+     //   addPiatto(piatto);
         if(piatto, piattoIngre) {
             addPiatto(piatto, piattoIngre);
-        }
+        } 
         
         $('#nomePiatto').val('');
         $('#prezzo').val('');
         $('#selectCategorie').val('');
         $('#ristorante').val('');
     })
-    function addPiatto(piatto, piattoIngre){
-        console.log(piatto, piattoIngre);
+ /*   function addPiatto(piatto, piattoIngre){
         $.ajax({
             type: 'POST',
             url: `/user/piattiuser/aggiungi/${idRistorante}/${idCategoria}`,
@@ -63,9 +61,9 @@ $(document).ready(function () {
             dataType: 'json',
             error: function(response) {
                 console.log("Risposta " + piatto.nome);
-                console.log("ID Piatto" + piatto.id);
+                console.log("ID Piatto" + response.id);
                 idPiatto = +response.id;
-                for (let ingrediente of piattoIngre.ingredienti) {
+               /* for (let ingrediente of piattoIngre.ingredienti) {
                     $.ajax({
                         type: 'POST',
                         url: `/user/ingredientiuser/aggiungi/${idPiatto}`,
@@ -76,7 +74,7 @@ $(document).ready(function () {
                             console.log(ingrediente);
                         }
                     });
-                }
+                }*/ /*
             idCategoria = -1;
             idRistorante = -1;
                 Swal.fire({
@@ -97,9 +95,59 @@ $(document).ready(function () {
                         title: 'ATTENZIONE!',
                         text: 'Riprova'
                     })
-                }*/
+                }*/ /*
         })
+        
+    }*/
+
+    function addPiatto(piatto, piattoIngre){
+        $.ajax({
+            type: 'POST',
+            url: `/user/piattiuser/aggiungi/${idRistorante}/${idCategoria}`,
+            data: JSON.stringify(piatto, piattoIngre),
+            contentType: 'application/json',
+            dataType: 'json',
+            error: function(response) {
+                console.log("Risposta " + piatto.nome);
+                console.log("ID Piatto" + response.id);
+                idPiatto = +response.id;
+             /*   for (let ingrediente of piattoIngre.ingredienti) {
+                    $.ajax({
+                        type: 'POST',
+                        url: `/user/ingredientiuser/aggiungi/${idPiatto}`,
+                        data: JSON.stringify(ingrediente),
+                        contentType: "application/json",
+                        dataType: 'json',
+                        success: function(data) {
+                            console.log(ingrediente);
+                        }
+                    });
+                }*/
+            idCategoria = -1;
+            idRistorante = -1;
+                Swal.fire({
+                    icon: 'success',
+                    title: 'INSERITO!',
+                    text: 'Aggiunta andata a buon fine',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                  setTimeout(function () {
+                      window.location.href='ristorantiUser.html';
+                    }, 1500);
+                },
+                
+                /*    success: function(response){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'ATTENZIONE!',
+                        text: 'Riprova'
+                    })
+                }*/ 
+        })
+        
     }
+    
         function getCategorieSelect() {
             $.get('/categorieuser', function (selectCategoria) {
                 const categoriaSelect = $('#selectCategorie');
