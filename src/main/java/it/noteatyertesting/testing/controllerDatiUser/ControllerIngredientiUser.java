@@ -30,4 +30,10 @@ public class ControllerIngredientiUser {
         Ingrediente ingrediente = new Ingrediente(ingredienti,p);
         ingredientiGEST.save(ingrediente);
     }
+
+    @DeleteMapping("ingredientiuser/elimina/{idIngrediente}")
+    public void elimina (@PathVariable int id){
+        ingredientiGEST.deleteById(id);
+    }
+
 }
