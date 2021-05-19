@@ -25,10 +25,9 @@ public class ControllerIngredientiUser {
     }
 
     @PostMapping("ingredientiuser/aggiungi/{idPiatto}")
-    public void addIngredientiAPiatto(@PathVariable int idPiatto, @RequestBody Ingrediente ingrediente) {
+    public void addIngredientiAPiatto(@PathVariable int idPiatto, @RequestParam String ingredienti) {
         Piatto p = piattiGEST.findById(idPiatto).orElse(null);
-        ingrediente.setPiatto(p);
+        Ingrediente ingrediente = new Ingrediente(ingredienti,p);
         ingredientiGEST.save(ingrediente);
-
     }
 }

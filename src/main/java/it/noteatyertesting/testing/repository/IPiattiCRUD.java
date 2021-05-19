@@ -12,4 +12,5 @@ public interface IPiattiCRUD extends JpaRepository<Piatto, Integer> {
 
     public List<Piatto> findPiattoByRistoranteId(Integer id);
 
+
 }

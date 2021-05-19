@@ -11,7 +11,7 @@ $(document).ready(function () {
             vettoreIngredienti1.push(valore);
             $('#listaIngredienti').append(`
             <a class="list-group-item list-group-item-action list-group-item-warning" id="eliminaIngrediente">${valore}</a>`);
-            console.log("Sono nel Vettore" + vettoreIngredienti1);
+
         }
         input.val('');
         input.focus();
@@ -60,8 +60,7 @@ $(document).ready(function () {
             contentType: 'application/json',
             dataType: 'json',
             error: function(response) {
-                console.log("Risposta " + piatto.nome);
-                console.log("ID Piatto" + response.id);
+
                 idPiatto = +response.id;
                /* for (let ingrediente of piattoIngre.ingredienti) {
                     $.ajax({
@@ -71,7 +70,7 @@ $(document).ready(function () {
                         contentType: "application/json",
                         dataType: 'json',
                         success: function(data) {
-                            console.log(ingrediente);
+
                         }
                     });
                 }*/ /*
@@ -104,12 +103,39 @@ $(document).ready(function () {
         $.ajax({
             type: 'POST',
             url: `/user/piattiuser/aggiungi/${idRistorante}/${idCategoria}`,
-            data: JSON.stringify(piatto, piattoIngre),
+            data: JSON.stringify(piatto),
             contentType: 'application/json',
-            dataType: 'json',
+            success: function (res){
+                console.log(res);
+                let id = res;
+                for (let ingredienti of piattoIngre){
+                    console.log(ingredienti);
+                    // $.ajax({
+                    //     type: 'POST',
+                    //     url: `/user/ingredientiuser/aggiungi/${id}`,
+                    //     data: ingredienti,
+                    //     //contentType: "application/json",
+                    //     dataType: 'text',
+                    //     success: function(data) {
+                    //         console.log("sono dentro");
+                    //     }
+                    // })
+                    //$.post(`/user/ingredientiuser/aggiungi/${id}`), {ingredienti: ingredienti}, function(res) {
+                     //   console.log('Vai così');
+                    //}
+                    $.ajax({
+                        type: "POST",
+                        url: `/user/ingredientiuser/aggiungi/${id}`,
+                        data: {ingredienti: ingredienti},
+                        success: function (res) {
+                            console.log(res + " muoviti");
+                        }
+                    })
+                }
+
+            },
             error: function(response) {
-                console.log("Risposta " + piatto.nome);
-                console.log("ID Piatto" + response.id);
+
                 idPiatto = +response.id;
              /*   for (let ingrediente of piattoIngre.ingredienti) {
                     $.ajax({
@@ -119,8 +145,8 @@ $(document).ready(function () {
                         contentType: "application/json",
                         dataType: 'json',
                         success: function(data) {
-                            console.log(ingrediente);
-                        }
+
+                                                   }
                     });
                 }*/
             idCategoria = -1;
@@ -162,7 +188,7 @@ $(document).ready(function () {
         function getRistoratori() {
             $.get('/user/ristorantiuser', function (selectRistoranti) {
                 const ristoranteSelect = $('#ristorante');
-                console.log(selectRistoranti);
+
                 for (let i = 0; i < selectRistoranti.length; i++){
                     $(`<option id='ristoranteSelect' value="${selectRistoranti[i].id}">${selectRistoranti[i].ragionesociale}</option>`)
                     .hide().appendTo(ristoranteSelect).fadeIn(i * 100);

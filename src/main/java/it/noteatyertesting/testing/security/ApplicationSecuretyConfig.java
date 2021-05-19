@@ -40,7 +40,7 @@ public class ApplicationSecuretyConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/ristoranti", "/ristoranti/{id}").hasAnyRole(Roles.ADMIN)
                 //controllerPiatti
                 .antMatchers("/piatti", "/piatti/ristoranteid/{idRistoratore}", "/piatti/piattoid/{idPiatto}",
-                        "/piatti/aggiungi/{idRistorante}/{idCategoria}", "/piatti/elimina/{idPiatto}",
+                        "/piatti/elimina/{idPiatto}",
                         "/piatti/edit/{idCategoria}").hasAnyRole(Roles.ADMIN)
                 //controllerCategorie
                 .antMatchers("/categorie").hasAnyRole(Roles.ADMIN)
@@ -50,7 +50,7 @@ public class ApplicationSecuretyConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/**").hasAnyRole(Roles.USER)
                 //accesso controller User
                 //accesso controller ristorantiUser
-                .antMatchers("/ristorantiuser", "/ristorantiuser/{id}","/usersession").hasAnyRole(Roles.USER)
+                .antMatchers("/ristorantiuser", "/ristorantiuser/{id}","/usersession","/piattiuser/aggiungi/${idRistorante}/${idCategoria}","ingredientiuser/aggiungi/{idPiatto}").hasAnyRole(Roles.USER)
                 //controller user Piatti
                 .anyRequest().authenticated()
                 .and()
