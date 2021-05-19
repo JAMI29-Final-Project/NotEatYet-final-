@@ -128,40 +128,29 @@ $(document).ready(function () {
                         url: `/user/ingredientiuser/aggiungi/${id}`,
                         data: {ingredienti: ingredienti},
                         success: function (res) {
-                            console.log(res + " muoviti");
-                        }
+                            idCategoria = -1;
+                            idRistorante = -1;
+                            Swal.fire({
+                            icon: 'success',
+                            title: 'INSERITO!',
+                            text: 'Aggiunta andata a buon fine',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                            setTimeout(function () {
+                            window.location.href='ristorantiUser.html';
+                            }, 1500);
+                        },
                     })
                 }
 
             },
             error: function(response) {
-
-                idPiatto = +response.id;
-             /*   for (let ingrediente of piattoIngre.ingredienti) {
-                    $.ajax({
-                        type: 'POST',
-                        url: `/user/ingredientiuser/aggiungi/${idPiatto}`,
-                        data: JSON.stringify(ingrediente),
-                        contentType: "application/json",
-                        dataType: 'json',
-                        success: function(data) {
-
-                                                   }
-                    });
-                }*/
-            idCategoria = -1;
-            idRistorante = -1;
                 Swal.fire({
-                    icon: 'success',
-                    title: 'INSERITO!',
-                    text: 'Aggiunta andata a buon fine',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-                  setTimeout(function () {
-                      window.location.href='ristorantiUser.html';
-                    }, 1500);
-                },
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                  })
                 
                 /*    success: function(response){
                     Swal.fire({
@@ -170,6 +159,7 @@ $(document).ready(function () {
                         text: 'Riprova'
                     })
                 }*/ 
+            }
         })
         
     }

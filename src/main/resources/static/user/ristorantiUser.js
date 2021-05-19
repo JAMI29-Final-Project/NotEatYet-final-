@@ -290,6 +290,7 @@ $(document).ready(function () {
     } 
     getCategorieSelect();
 
+    // RECUPERO DATI PER MODIFICA PIATTO MODALE
     let editModePiatto = false;
     let idModificaPiatto = -1;
     let idcategoriaPiatto = -1;
@@ -308,15 +309,43 @@ $(document).ready(function () {
             $('#modificaPiatto').text('Modifica ' + modifica.nome);
             $('#title').text('Modifica ' + modifica.nome);
         });
+        $.get(`/user/ingredientiuser/${idModificaPiatto}`, function (resume) {
+            console.log(resume);
+            const listaIngredientiUser = $('#listaIngredientiModifica');
+            for (let i = 0; i < resume.length; i++) {
+                $(`<div class='input-group mb-3' id='riga-${resume[i].id}'>
+                <input type='text' id='ingredienti`+ i +`' data-idLet='${resume[i].id}' class='form-control' placeholder="Inserire Ingredienti da modificare..." required>
+                    <button class='btn btn-outline-secondary' type="button" id="eliminaIngrediente" data-idLet='${resume[i].id}'>Elimina</button>
+                    </div>
+                    `).appendTo(listaIngredientiUser);
+            $('#ingredienti' + i).val(resume[i].nome);
+            }
+          })
     });
-    $('#modificaPiatto').click(function () {
+
+    //MODIFICA PIATTO
+    $('#modificaPiatto').click(function (ingredienti) {
+        console.log("Ingre " + ingredienti)
+        const ingre = null;
+        //Prendo valore ingredienti
+        for (let i = 0; i < ingredienti.length; i++) {
+            const idModIng = +$(this).attr('data-idLet');
+            console.log("ID Ingr" + idModIng);
+                ingre = {
+                    ingrediente:{
+                        id: idModIng,
+                        nome: $('#ingredienti' + i).val()
+                    } 
+                }
+                console.log("Lista" + ingre);
+        }
         const piatto = {
             id: idModificaPiatto,
             nome: $('#nome').val(),
             prezzo: $('#prezzo').val(),
             categoria: {
                 id: $('#selectCategorie').val(),
-            }           
+            },      
         }
         const idcatPiat = $('#selectCategorie').val();
         idcategoriaPiatto = idcatPiat;
@@ -333,6 +362,7 @@ $(document).ready(function () {
                     Swal.fire('Salvato!', '', 'success')
                     piatto.id = idModificaPiatto;
                     modificaPiatto(piatto);
+                    modificaIngrediente(ingre);
                     setTimeout(function () {
                         window.location.href='ristorantiUser.html';
                     }, 2000);
@@ -360,6 +390,103 @@ $(document).ready(function () {
             }*/
         });
     }
+    function modificaIngrediente(ingre){
+        $.ajax({
+            type: "PUT",
+            url: `/user/ingredientiuser/modifica/`,
+            data: JSON.stringify(ingre),
+            contentType: 'application/json',
+            success: function (response) {
+
+                console.log("Fatto Ingre")
+            },
+            error: function (error) {
+                alert("Problema nella modifica Ingrediente");                
+                console.log(error);
+            }
+        });
+    }
+    // ELIMINA INGREDIENTE
+    $('#listaIngredientiModifica').on('click', '#eliminaIngrediente', function() {
+        const idIngred = $(this).attr('data-idLet');
+        deteteIngrediente(idIngred);
+    });
+    function deteteIngrediente(idIngred) {
+        let idPagina = $(`#riga-${idIngred}`);
+        $.ajax({
+            type: "DELETE",
+            url: `/user/ingredientiuser/elimina/${idIngred}`,
+            success: function (response) {
+                console.log("ELIMINA");
+                idPagina.slideUp(300, function () {
+                    idPagina.remove(); 
+                })
+            },
+            error: function(error) {
+                alert("Errore durante la cancellazione. Riprovare."); 
+            }
+        });
+      }
+
+    //AGGIUNGI INGREDIENTE NEL MODALE MODIFICA PIATTO
+    let vettoreIngredienti1 = [];
+    $('#aggiungiIngredienteModale').click(function() {
+        $('#inputAggiungiIngrediente').append(`
+        <div class='input-group mb-3'>
+        <input type='text' id='ingredientiModifica' class='form-control' placeholder="Inserire Ingredienti..." required>
+        <button class='btn btn-primary float-end' id="aggiungiIngredientebtn">Aggiungi Ingrediente</button>
+        </div>
+        <ol class="list-group" id="listaModificaIngredienti"></ol>`);
+        $('#aggiungiIngredienteModale').remove();
+        
+        $('#aggiungiIngredientebtn').click(function() {
+            const input = $('#ingredientiModifica');
+            const valore = input.val();
+            
+            if (valore) {
+                vettoreIngredienti1.push(valore);
+                $('#listaModificaIngredienti').append(`
+                <a class="list-group-item list-group-item-action list-group-item-warning" id="eliminaIngrediente">${valore}</a>`);
+                
+            }
+            input.val('');
+            input.focus();
+    });
+    $('#listaModificaIngredienti').on('click', '#eliminaIngrediente', function() { 
+        const nome = $(this).parent().attr('nome');
+        const ingrediente = {
+            "nome": nome
+        };
+        $(this).parent().remove();
+        const indiceIngrediente = vettoreIngredienti1.indexOf(ingrediente);
+        vettoreIngredienti1.splice(indiceIngrediente, 1);
+    });
+});
+
+// AGGIUNGI INGREDIENTE NEL MODALE ODIFICA PIATTO
+$('#modificaPiatto').click(function () {
+    let ingredienti = [];
+    vettoreIngredienti1.forEach(ingrediente => ingredienti.push(ingrediente));
+    let piattoIngre = vettoreIngredienti1;
+ //   addPiatto(piatto);
+    if(piattoIngre) {
+        addIngrediente(piattoIngre);
+    } 
+})
+function addIngrediente(piattoIngre){
+    console.log(piattoIngre);
+    for (let ingredienti of piattoIngre){
+        $.ajax({
+            type: "POST",
+            url: `/user/ingredientiuser/aggiungi/${idModificaPiatto}`,
+            data: {ingredienti: ingredienti},
+            success: function (res) {
+                idCategoria = -1;
+                idRistorante = -1;
+            }
+        })
+    }
+}
 
     // DETTAGLIO PIATTO MODALE CON INGREDIENTI
     $('#listaMenuDettaglio').on('click', '.btn-dettaglioPiatto', function () {
