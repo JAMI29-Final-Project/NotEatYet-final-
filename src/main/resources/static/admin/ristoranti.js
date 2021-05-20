@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+   // ScrollReveal().reveal('.scroll')
     // Lista Ristoranti completa
     function getRistoranti() {
         $.get('/admin/ristoranti', function (resume) {
@@ -11,7 +11,7 @@ $(document).ready(function () {
                 } else {
                     img = '../upload/' + resume[i].immagini;
                 }
-                $(`<tr id='riga-${resume[i].id}'>
+                $(`<tr id='riga-${resume[i].id} class='scroll'>
                 <td><img src='${img}' alt='logo' style='width: 50px; border-radius: 50%;'></td>
                 <td>${resume[i].user.nome} ${resume[i].user.cognome}</td>
                 <td class='ragionesociale'>${resume[i].ragionesociale}</td>
