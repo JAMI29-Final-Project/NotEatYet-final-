@@ -92,7 +92,7 @@ public class ControllerRistorantiUser {
 
         Ristorante ristorante = getOne(id);
 
-        fs.deleteFile("./src/main/resources/static/upload"+ristorante.getImmagini());
+        fs.deleteFile(ristorante.getImmagini());
         for (Piatto piattodel : ristorante.getMenu()) {
             for(Ingrediente ingrediente : piattodel.getIngredienti()) {
                 ingredientiGEST.deleteById(ingrediente.getId());
