@@ -19,7 +19,14 @@ $(document).ready(function () {
             console.log(resume);
             const listaRistorantiUser = $('#listaRistorantiUser');
             for (let i = resume.length - 1; i >= 0; i--) {
+                let img = '';
+                if (resume[i].immagini === null) {
+                    img = '../logos/logo.png';
+                } else {
+                    img = '../upload/' + resume[i].immagini;
+                }
                 $(`<tr id='riga-${resume[i].id}'>
+                <td><img src='${img}' alt='logo' style='width: 50px; border-radius: 50%;'></td>
                 <td class='ragionesociale'>${resume[i].ragionesociale}</td>
                 <td class='piva'>${resume[i].piva}</td>
                 <td class='via'>${resume[i].via}</td>
@@ -68,7 +75,15 @@ $(document).ready(function () {
             const dettaglioRis = $('#dettaglioRis');
             $('#title').text(dettaglio.ragionesociale + ' Nel Dettaglio');
             $('#menuDettaglio').text("Menu di " + dettaglio.ragionesociale);
+            let img = '';
+                if (dettaglio.immagini === null) {
+                    img = '../logos/logo.png';
+                } else {
+                    img = '../upload/' + dettaglio.immagini;
+                }
             let row = `
+            <img src='${img}' alt='logo' style='width: 150px; border-radius: 50%;'>
+            <hr>
             <h4 class='fw-light text-dark'><strong class="fw-bolder">Nome: </strong>${dettaglio.ragionesociale}</h4> 
             <h4 class='fw-light text-dark'><strong>Partita IVA: </strong>${dettaglio.piva}</h4>   
             <h4 class='fw-light text-dark'><strong>Indirizzo: </strong>${dettaglio.via} ${dettaglio.ncivico}</h4> 
