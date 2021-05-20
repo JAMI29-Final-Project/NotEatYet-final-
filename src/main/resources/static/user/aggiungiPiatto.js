@@ -141,6 +141,7 @@ $(document).ready(function () {
                             window.location.href='ristorantiUser.html';
                             }, 1500);
                         },
+                       // uploadFile(idPiatto);
                     })
                 }
 
@@ -162,6 +163,30 @@ $(document).ready(function () {
             }
         })
         
+    }
+    function uploadFile(idPiatto) {
+        
+        console.log(idRistorante + " CONFERMA");
+        var data = $('#formFile').val();
+        console.log(data);
+        var fd = new FormData();
+        fd.append("ajax_file",$('#formFile')[0].files[0])
+        $.ajax({
+            type: "POST",
+            url: `/user/fileupload/${idPiatto}`,
+            data: fd,
+            contentType: false,
+            processData: false,
+            success: function () {
+                console.log("Riuscito");
+            },
+            error: function () {
+                console.log("Non riuscito");
+            }
+        });
+
+
+
     }
     
         function getCategorieSelect() {
