@@ -39,7 +39,7 @@
   }
 
   .pictureCorrectLogin {
-	background-image: url('https://images2.alphacoders.com/934/934992.jpg'); 
+	background-image: url('../img/login_success.jpg'); 
     height: 100vh; 
     margin: 0px; 
     background-size: cover; 
@@ -47,7 +47,7 @@
 }
 
 .pictureErrorLogin {
-	background-image: url('../img/accessonegato.jpg'); 
+	background-image: url('../img/login_success.jpg'); 
     height: 100vh; 
     margin: 0px; 
     background-size: cover; 
@@ -71,3 +71,18 @@
   min-width: 100%;
   min-height: 100%;
 }*/
+
+.bg-yellow {
+  background-color: #fec24a !important;
+  border-radius: 100px !important;
+
+}
+  .bg-yellow:hover{
+      background-color: #ffb92d !important;
+  }
+
+  .text-btn {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    color: #ae2a2f !important;
+}
