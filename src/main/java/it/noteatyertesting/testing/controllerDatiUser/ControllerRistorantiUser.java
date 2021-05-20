@@ -8,8 +8,10 @@ import it.noteatyertesting.testing.model.Ristorante;
 import it.noteatyertesting.testing.repository.IIngredientiCRUD;
 import it.noteatyertesting.testing.repository.IPiattiCRUD;
 import it.noteatyertesting.testing.repository.IRistorantiCRUD;
+import it.noteatyertesting.testing.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
 import java.util.List;
@@ -32,6 +34,13 @@ public class ControllerRistorantiUser {
     //interfaccia che gestisce le chiamate della tabella Ingredienti
     @Autowired
     IIngredientiCRUD ingredientiGEST;
+
+    private FileStorageService fs;
+
+    @Autowired
+    public ControllerRistorantiUser(FileStorageService fs) {
+        this.fs = fs;
+    }
 
     @GetMapping("/usersession")
     User user (Principal principal){
@@ -57,11 +66,21 @@ public class ControllerRistorantiUser {
         return ristorante;
     }
     @PostMapping("/ristorantiuser")
-    public void addResturant(Principal principal ,@RequestBody Ristorante ristorante) {
+    public int addResturant(Principal principal ,@RequestBody Ristorante ristorante) {
         String username = principal.getName();
         User utente = (User) daoUser.findByUsername(username).orElse(null);
         ristorante.setUser(utente);
         ristorantiGEST.save(ristorante);
+        return ristorante.getId();
+    }
+
+    @PostMapping("/fileupload")
+    public String uploadFile(@RequestParam("ajax_file") MultipartFile file) {
+        System.out.println(file.getOriginalFilename());
+        if(!file.isEmpty()) {
+            return fs.salvaFile(file);
+        }
+        return "NO";
     }
 
     @DeleteMapping("/ristorantiuser/{id}")
