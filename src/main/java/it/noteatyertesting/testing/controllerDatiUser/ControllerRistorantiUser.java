@@ -74,8 +74,12 @@ public class ControllerRistorantiUser {
         return ristorante.getId();
     }
 
-    @PostMapping("/fileupload")
-    public String uploadFile(@RequestParam("ajax_file") MultipartFile file) {
+    @PostMapping("/fileupload/{idRistornate}")
+    public String uploadFile(@PathVariable int idRistornate,@RequestParam("ajax_file") MultipartFile file) {
+        Ristorante ristorante = ristorantiGEST.findById(idRistornate).orElse(null);
+        if(ristorante != null){
+            ristorante.setImmagini(file.getOriginalFilename());
+        }
         System.out.println(file.getOriginalFilename());
         if(!file.isEmpty()) {
             return fs.salvaFile(file);
