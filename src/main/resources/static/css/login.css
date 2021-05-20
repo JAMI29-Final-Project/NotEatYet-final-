@@ -1,9 +1,13 @@
-.pictureLogin {
-	background-image: url('https://i.pinimg.com/originals/0e/61/13/0e6113bbc2abaab64f1a795559b113fc.jpg'); 
-    height: 100vh; 
-    margin: 0px; 
-    background-size: cover; 
-    background-position: top;
+.borderRadius{
+  border-radius: 100px !important;
+}
+
+.roundB{
+  border-radius: 15px !important;
+}
+
+.opacity{
+  opacity: 0.9;
 }
 
 .captionCenter {
@@ -35,7 +39,7 @@
   }
 
   .pictureCorrectLogin {
-	background-image: url('https://images2.alphacoders.com/934/934992.jpg'); 
+	background-image: url('../img/login_success.jpg'); 
     height: 100vh; 
     margin: 0px; 
     background-size: cover; 
@@ -43,7 +47,7 @@
 }
 
 .pictureErrorLogin {
-	background-image: url('https://www.digipen.edu.sg/sites/default/files/public/img/academics/01-hero/digipen-singapore-continuing-education-cybersecurity-software-developer.jpg'); 
+	background-image: url('../img/login_success.jpg'); 
     height: 100vh; 
     margin: 0px; 
     background-size: cover; 
@@ -51,10 +55,34 @@
 }
 
 .videoLogin {
-    position: fixed;
-    width: 100vh;
-    right: 0;
-    bottom: 0;
-    min-width: 100%;
-    min-height: 100%;
+  object-fit: cover;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+/*
+.videoLogin {
+  position: fixed;
+  width: 100vh;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}*/
+
+.bg-yellow {
+  background-color: #fec24a !important;
+  border-radius: 100px !important;
+
+}
+  .bg-yellow:hover{
+      background-color: #ffb92d !important;
+  }
+
+  .text-btn {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    color: #ae2a2f !important;
 }

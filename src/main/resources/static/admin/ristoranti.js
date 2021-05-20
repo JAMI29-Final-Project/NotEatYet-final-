@@ -1,9 +1,12 @@
 $(document).ready(function () {
+
+    // Lista Ristoranti completa
     function getRistoranti() {
-        $.get('/ristoranti', function (resume) {
+        $.get('/admin/ristoranti', function (resume) {
             const output = $('#listaRistoranti');
             for (let i = resume.length -1; i >= 0; i--) {
                 $(`<tr id='riga-${resume[i].id}'>
+                <td>${resume[i].user.nome} ${resume[i].user.cognome}</td>
                 <td class='ragionesociale'>${resume[i].ragionesociale}</td>
                 <td class='piva'>${resume[i].piva}</td>
                 <td class='via'>${resume[i].via}</td>
@@ -11,7 +14,7 @@ $(document).ready(function () {
                 <td class='regione'>${resume[i].regione}</td>
                 <td>
                     <div class="btn-group" role="group">
-                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Opzioni</button>
+                        <button id="btnGroupDrop1" type="button" class="btn bg-yellow text-btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Opzioni</button>
                             <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                                 <li><a class="dropdown-item btn-dettaglio" data-bs-toggle="modal" data-bs-target="#dettaglio" data-id='${resume[i].id}'>Dettaglio</a></li>
                                 <li><a class="dropdown-item btn-modifica-risto" data-bs-toggle="modal" data-bs-target="#modifica" data-id='${resume[i].id}'>Modifica</a></li>
@@ -25,23 +28,23 @@ $(document).ready(function () {
     }
     getRistoranti();
 
+    // Svuoto Modale dopo la chiusura
     $('#ristoranteDettaglioClose').click(function (){
         $('#dettaglioRis').html('');
         $('#listaMenuDettaglio').html('');
     });
     $('#listaDettaglioClose').click(function (){
         $('#dettaglioPiatto').html('');
+        $('#listaingre').html('');
     });
-   /* $('#ristoranteDettaglioCloseHead').on('click', '#ristoranteDettaglioClose', function () {
-        getRistoranti();
-    });*/
-    // Dettaglio Del Ristorante
+
+    // Dettaglio Del Ristorante con lista piatti nel modale1
     $('#listaRistoranti').on('click', '.btn-dettaglio', function () {
         const idristorante = $(this).attr('data-id');
         getRisto(idristorante);
     });
     function getRisto(idristorante) {
-        $.get(`ristoranti/${idristorante}`, function (dettaglio) {
+        $.get(`/admin/ristoranti/${idristorante}`, function (dettaglio) {
             console.log(dettaglio);
             const dettaglioRis = $('#dettaglioRis');
             $('#title').text(dettaglio.ragionesociale + ' Nel Dettaglio');
@@ -55,7 +58,7 @@ $(document).ready(function () {
 			`;
             $(row).hide().appendTo(dettaglioRis).fadeIn(500);
 		})
-        $.get(`piatti/ristoranteid/${idristorante}`, function(listaPiatti) {
+        $.get(`/admin/piatti/ristoranteid/${idristorante}`, function(listaPiatti) {
             const ristoranteListaPiatti = $('#listaMenuDettaglio');
             for (let i = listaPiatti.length -1; i >= 0; i--) {
                 $(`<tr id='riga-${listaPiatti[i].id}'>
@@ -63,21 +66,14 @@ $(document).ready(function () {
                 <td>${listaPiatti[i].prezzo}</td>
                 <td>${listaPiatti[i].categoria.nome}</td>
                 <td>
-                    <div class="btn-group" role="group">
-                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Opzioni</button>
-                            <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                <li><a class="dropdown-item btn-dettaglioPiatto" data-bs-toggle="modal" data-bs-target="#dettaglioPiat" data-idLista='${listaPiatti[i].id}'>Dettaglio</a></li>
-                                <li><a class="dropdown-item btn-modifica" data-bs-toggle="modal" data-bs-target="#modificaPiat" data-idLista='${listaPiatti[i].id}'>Modifica</a></li>
-                                <li><a class="dropdown-item btn-elimina" data-idLista='${listaPiatti[i].id}'>Elimina</a></li>
-                            </ul>
-                    </div>
+                    <a class="btn bg-yellow text-btn btn-dettaglioPiatto" data-bs-toggle="modal" data-bs-target="#dettaglioPiat" data-idLista='${listaPiatti[i].id}'>Dettaglio</a>
                 </td>
             </tr>`).hide().appendTo(ristoranteListaPiatti).fadeIn(i * 150); //Gestisci i pulsanti
             }
         })
 	} 
     
-
+    // Cancellazione ristorante
     function deleteRistorante(id) {
         let idPagina = $(`#riga-${id}`);
         $.ajax({
@@ -130,13 +126,13 @@ $(document).ready(function () {
           })
       });
 
-    
+    // Modifica Ristorante
     let editMode = false;
     let idModifica = -1;
     function modificaRistorante(ristorante) {
         $.ajax({
             type: "PUT",
-            url: "ristoranti",
+            url: `/admin/ristoranti`,
             data: JSON.stringify(ristorante),
             contentType: 'application/json',
             dataType: 'json',
@@ -153,7 +149,7 @@ $(document).ready(function () {
         editMode = true;
         const id = +$(this).attr('data-id');
         idModifica = id;
-        $.get(`/ristoranti/${id}`, function(modifica) {
+        $.get(`/admin/ristoranti/${id}`, function(modifica) {
             $('#ragionesociale').val(modifica.ragionesociale);
             $('#piva').val(modifica.piva);
             $('#cittaRistorante').val(modifica.citta);
@@ -210,7 +206,7 @@ $(document).ready(function () {
 
 
     // DETTAGLIO ELIMINA PIATTO
-    function detetePiatto(idPiatto) {
+   /* function detetePiatto(idPiatto) {
         let idPagina = $(`#riga-${idPiatto}`);
         $.ajax({
             type: "DELETE",
@@ -341,28 +337,41 @@ $(document).ready(function () {
            /* error: function (error) {
                 alert("Problema nella modifica");                
                 console.log(error);
-            }*/
+            }*/ /*
         });
-    }
+    } */
 
-    // DETTAGLIO PIATTO
+    // DETTAGLIO PIATTO Modale2
     $('#listaMenuDettaglio').on('click', '.btn-dettaglioPiatto', function () {
         const idDetPiatto = $(this).attr('data-idLista');
         getPiatto(idDetPiatto);
     });
     function getPiatto(idDetPiatto) {
         $.get(`piatti/piattoid/${idDetPiatto}`, function (dettaglio) {
-            console.log(dettaglio);
             const dettaglioPiatto = $('#dettaglioPiatto');
             $('#titlePiatto').text(dettaglio.nome + ' Nel Dettaglio');
 			let row = `
             <h4 class='fw-light text-dark'><strong class="fw-bolder">Nome: </strong>${dettaglio.nome}</h4> 
             <h4 class='fw-light text-dark'><strong>Prezzo: </strong>${dettaglio.prezzo}</h4>   
             <h4 class='fw-light text-dark'><strong>Categoria: </strong>${dettaglio.categoria.nome}</h4> 
-            <h4 class='fw-light text-dark'><strong>Ingredienti: </strong>${dettaglio.ingredienti}</h4>
+            <h4 class='fw-light text-dark'><strong>Ingredienti: </strong></h4>
 			`;
             $(row).hide().appendTo(dettaglioPiatto).fadeIn(500);
 		})
         
-	} 
+        $.get(`/admin/ingredienti/${idDetPiatto}`, function (ingredienti) {
+            const listaingredienti = $('#listaingre');
+            console.log(ingredienti);
+            if (ingredienti.length == 0){
+                console.log("Sono Dentro");
+                let error = `<h4 class='fw-light text-dark'>Non sono presenti Ingredienti</h4>`;
+                $(listaingredienti).append(error);
+            } else {
+                for (let i = 0; i < ingredienti.length; i++) {
+                    let lista = `<h5 class='fw-light text-dark'>${ingredienti[i].nome}</h5>`;
+                    $(listaingredienti).append(lista);
+            }
+        }
+	})
+    }
 });

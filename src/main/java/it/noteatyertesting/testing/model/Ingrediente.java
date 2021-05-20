@@ -1,4 +1,5 @@
 package it.noteatyertesting.testing.model;
+
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -10,8 +11,8 @@ public class Ingrediente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nome;
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="piatto_id", nullable=false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "piatto_id", nullable = false)
     @JsonIgnore
     Piatto piatto;
 
