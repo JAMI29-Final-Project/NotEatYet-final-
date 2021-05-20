@@ -5,6 +5,25 @@
 .bg-yellow {
     background-color: #fec24a !important;
     border-radius: 100px !important;
+
+}
+    .bg-yellow:hover{
+        background-color: #ffb92d !important;
+    }
+
+.bg-yellowNoRad {
+    background-color: #fec24a !important;
+
+}
+    .bg-yellowNoRad:hover{
+        background-color: #ffb92d !important;
+    }
+
+.btn-outline-warning:hover {
+    background-color: #ffb92d !important;
+}
+.roundB{
+    border-radius: 15px !important;
 }
 
 .borderRadius{

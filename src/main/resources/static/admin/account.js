@@ -11,7 +11,7 @@ $(document).ready(function () {
                 <td>${account[i].username}</td>
                 <td>
                     <div class="btn-group" role="group">
-                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Opzioni</button>
+                        <button id="btnGroupDrop1" type="button" class="btn btn-danger borderRadius dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Opzioni</button>
                             <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                                 <li><a class="dropdown-item btn-modificaAccount" data-bs-toggle="modal" data-bs-target="#account" data-id='${account[i].id}'>Modifica</a></li>
                                 <li><a class="dropdown-item btn-eliminaAccount" data-id='${account[i].id}'>Elimina</a></li>

@@ -1,13 +1,13 @@
-.pictureLogin {
-	background-image: url('https://i.pinimg.com/originals/0e/61/13/0e6113bbc2abaab64f1a795559b113fc.jpg'); 
-    height: 100vh; 
-    margin: 0px; 
-    background-size: cover; 
-    background-position: top;
-}
-
 .borderRadius{
   border-radius: 100px !important;
+}
+
+.roundB{
+  border-radius: 15px !important;
+}
+
+.opacity{
+  opacity: 0.9;
 }
 
 .captionCenter {
@@ -47,7 +47,7 @@
 }
 
 .pictureErrorLogin {
-	background-image: url('https://www.digipen.edu.sg/sites/default/files/public/img/academics/01-hero/digipen-singapore-continuing-education-cybersecurity-software-developer.jpg'); 
+	background-image: url('../img/accessonegato.jpg'); 
     height: 100vh; 
     margin: 0px; 
     background-size: cover; 

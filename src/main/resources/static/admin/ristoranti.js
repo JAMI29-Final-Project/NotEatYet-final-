@@ -14,7 +14,7 @@ $(document).ready(function () {
                 <td class='regione'>${resume[i].regione}</td>
                 <td>
                     <div class="btn-group" role="group">
-                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Opzioni</button>
+                        <button id="btnGroupDrop1" type="button" class="btn bg-yellow text-btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Opzioni</button>
                             <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                                 <li><a class="dropdown-item btn-dettaglio" data-bs-toggle="modal" data-bs-target="#dettaglio" data-id='${resume[i].id}'>Dettaglio</a></li>
                                 <li><a class="dropdown-item btn-modifica-risto" data-bs-toggle="modal" data-bs-target="#modifica" data-id='${resume[i].id}'>Modifica</a></li>
@@ -66,7 +66,7 @@ $(document).ready(function () {
                 <td>${listaPiatti[i].prezzo}</td>
                 <td>${listaPiatti[i].categoria.nome}</td>
                 <td>
-                    <a class="btn btn-primary btn-dettaglioPiatto text-light" data-bs-toggle="modal" data-bs-target="#dettaglioPiat" data-idLista='${listaPiatti[i].id}'>Dettaglio</a>
+                    <a class="btn bg-yellow text-btn btn-dettaglioPiatto" data-bs-toggle="modal" data-bs-target="#dettaglioPiat" data-idLista='${listaPiatti[i].id}'>Dettaglio</a>
                 </td>
             </tr>`).hide().appendTo(ristoranteListaPiatti).fadeIn(i * 150); //Gestisci i pulsanti
             }

@@ -54,7 +54,7 @@
                                 </a>   
                                 <ul class='dropdown-menu dropdown-menu-lg-end' aria-labelledby='navbarDropdown'>
                                   <li><a class='dropdown-item' aria-current='page' href='gestione_account.html'>Gestione Account</a></li>   
-                                  <li><a class='dropdown-item' aria-current='page' href='../changelog.html'>Changelog</a></li>
+                                  <li><a class='dropdown-item' aria-current='page' href='../changelog.html'>Info NotEatYet</a></li>
                                 </ul> 
                                 </li>
                           <li class='nav-item distance-btn'>   
@@ -68,11 +68,11 @@
 		</nav>  
                 <!-- Fine Menu, inzio pagina -->
                     <div style="padding-top: 120px; padding-bottom: 10px;">
-                      <div class='card col-sm-11 mx-auto opacity' style="padding-top: 50px; padding-bottom: 50px;">
+                      <div class='card col-sm-11 mx-auto opacity roundB' style="padding-top: 50px; padding-bottom: 50px;">
                           <div class='card-body'>
                               <div class='text-center'>
                                   <figure class="hover-rotate mx-auto"> 
-                                  <img src='../logos/logo.png' alt='autori' style='padding-left: 10px; width: 100px;'>
+                                  <img src='../logos/logo.png' class="roundB" alt='logo' style='width: 100px;'>
                                   </figure>
                                   <p class='fs-2 fw-bold text-dark' id="lista">Lista Ristoranti</p>
                                   </div> 
@@ -98,11 +98,11 @@
               <!-- Modale Modifica Ristorante -->
               <div class="modal fade opacity" id="modifica" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
+                  <div class="modal-content roundB">
                     <div class="modal-header mx-auto">
                       <div class="text-center">
                         <figure class="hover-rotate">
-                        <img src="../logos/linkedin_profile_image.png" alt="block" style="width: 150px;">
+                        <img src="../logos/linkedin_profile_image.png" class="roundB" alt="block" style="width: 150px;">
                         <br><br>
                     <p class='fs-2 fw-bold text-dark text-center' id="modificaRistoranteTitle">Modifica Ristorante</p> 
                         </figure>
@@ -141,7 +141,7 @@
                                            <input type='number' id='ncivico' class='form-control' placeholder="Inserire N. Civico da modificare..." required> 
                                     </div>
                                     </div>
-                                        <button class='btn btn-primary float-end' id="modificaRistorante">Invia Modifica</button>  
+                                        <button class='btn bg-yellow text-btn float-end' id="modificaRistorante">Invia Modifica</button>  
                       </div>
                   </div>  
                 </div>
@@ -149,10 +149,10 @@
               <!-- Modale Dettaglio Ristorante -->
               <div class="modal fade opacity" id="dettaglio" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-fullscreen">
-                  <div class="modal-content">
+                  <div class="modal-content roundB">
                     <div class="modal-header">
                         <figure class="hover-rotate mx-auto">
-                        <img src="../logos/linkedin_profile_image.png" alt="block" style="width: 150px;">
+                        <img src="../logos/linkedin_profile_image.png" class="roundB" alt="block" style="width: 150px;">
                       </figure>
                     <p class='fs-1 fw-bold text-dark modal-title float-end' id="title"></p> 
                   <button type="button" id="ristoranteDettaglioClose" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -165,7 +165,7 @@
                                 <div class='text-center'> 
                                   <div id="dettaglioRis"></div>
                                 <br></br> 
-                                   <a href='ristoranti.html' class='btn btn-primary'>Torna ai Ristoranti</button></a> 
+                                   <a href='ristoranti.html' class='btn text-btn bg-yellow'>Torna ai Ristoranti</button></a> 
                                 </div>   
                             </div> 
                         </div> 
@@ -201,10 +201,10 @@
                   <!-- Modale Dettaglio Piatto -->
               <div class="modal fade" id="dettaglioPiat" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog">
-                  <div class="modal-content">
+                  <div class="modal-content roundB">
                     <div class="modal-header">
                         <figure class="hover-rotate mx-auto">
-                        <img src="../logos/linkedin_profile_image.png" alt="block" style="width: 150px;">
+                        <img src="../logos/linkedin_profile_image.png" class="roundB" alt="block" style="width: 150px;">
                       </figure>
                     <p class='fs-3 fw-bold text-dark modal-title float-end' id="titlePiatto"></p> 
                   <button type="button" id="listaDettaglioClose" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -215,7 +215,7 @@
                                   <div id="listaingre"></div>
                                 </div>   
                                 <br></br><hr>
-                                   <a href='ristoranti.html' class='btn btn-primary float-end'>Torna ai Ristoranti</button></a> 
+                                   <a href='ristoranti.html' class='btn bg-yellow text-btn float-end'>Torna ai Ristoranti</button></a> 
                             </div> 
                     </div> 
                       </div>
