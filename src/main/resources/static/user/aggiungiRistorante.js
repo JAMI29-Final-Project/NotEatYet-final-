@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    let idRistorante = -1;
     function addRistorante(ristorante){
         console.log(ristorante);
         $.ajax({
@@ -8,8 +9,9 @@ $(document).ready(function () {
             contentType: 'application/json',
           /*  dataType: 'json', */
             success: function(success){
+                idRistorante = success;
                 console.log("Sono in success " + success);
-                console.log("ID success "+ ristorante.id);
+                console.log("ID success "+ idRistorante);
                 Swal.fire({
                     icon: 'success',
                     title: 'INSERITO!',
@@ -20,6 +22,7 @@ $(document).ready(function () {
                 setTimeout(function () {
                       window.location.href='ristorantiUser.html';
                     }, 1500);
+                uploadFile(idRistorante);
             },
             error: function () {
                 Swal.fire({
@@ -30,6 +33,30 @@ $(document).ready(function () {
             } 
         })
     } 
+    function uploadFile(idRistorante) {
+        
+        console.log(idRistorante + " CONFERMA");
+        var data = $('#formFile').val();
+        console.log(data);
+        var fd = new FormData();
+        fd.append("ajax_file",$('#formFile')[0].files[0])
+        $.ajax({
+            type: "POST",
+            url: `/user/fileupload/${idRistorante}`,
+            data: fd,
+            contentType: false,
+            processData: false,
+            success: function () {
+                console.log("Riuscito");
+            },
+            error: function () {
+                console.log("Non riuscito");
+            }
+        });
+
+
+
+    }
     
     $('#aggiungiRistorante').click(function () {
         const ristorante = {
@@ -50,4 +77,21 @@ $(document).ready(function () {
         $('#ncivico').val('');
         
     })
+
+    // Immagine Visualizzazione
+    $('#formFile').change(function () {
+        showImage(this);
+    })
+
+    function showImage(fileInput) {
+        file = fileInput.files[0];
+        reader = new FileReader();
+
+        reader.onload = function(e) {
+            $('#showThumb').attr('src', e.target.result);
+            $('#showThumb').css('display', 'block');
+        };
+        reader.readAsDataURL(file);
+    }
+    // Fine Immagine
 });
