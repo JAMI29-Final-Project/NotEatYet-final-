@@ -22,6 +22,20 @@ public class Ristorante {
     private User user;
     @Transient
     private List<Piatto> menu;
+    private String immagini;
+
+    public Ristorante(int id, String ragionesociale, String piva, String regione, String citta, String via, int ncivico, User user, List<Piatto> menu, String immagini) {
+        this.id = id;
+        this.ragionesociale = ragionesociale;
+        this.piva = piva;
+        this.regione = regione;
+        this.citta = citta;
+        this.via = via;
+        this.ncivico = ncivico;
+        this.user = user;
+        this.menu = menu;
+        this.immagini = immagini;
+    }
 
     public Ristorante(int id, String ragionesociale, String piva, String regione, String citta, String via, int ncivico, User user, List<Piatto> menu) {
         this.id = id;
@@ -34,9 +48,16 @@ public class Ristorante {
         this.user = user;
         this.menu = menu;
     }
-
     public Ristorante() {
         super();
+    }
+
+    public String getImmagini() {
+        return immagini;
+    }
+
+    public void setImmagini(String immagini) {
+        this.immagini = immagini;
     }
 
     public int getId() {
