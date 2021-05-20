@@ -79,6 +79,7 @@ public class ControllerRistorantiUser {
         Ristorante ristorante = ristorantiGEST.findById(idRistornate).orElse(null);
         if(ristorante != null){
             ristorante.setImmagini(file.getOriginalFilename());
+            ristorantiGEST.save(ristorante);
         }
         System.out.println(file.getOriginalFilename());
         if(!file.isEmpty()) {
