@@ -23,7 +23,7 @@ $(document).ready(function () {
                 if (resume[i].immagini === null) {
                     img = '../logos/logo.png';
                 } else {
-                    img = '../upload/' + resume[i].immagini;
+                    img = './../upload/' + resume[i].immagini;
                 }
                 $(`<tr id='riga-${resume[i].id}'>
                 <td><img src='${img}' alt='logo' style='width: 50px; border-radius: 50%;'></td>
@@ -96,6 +96,7 @@ $(document).ready(function () {
             const ristoranteListaPiatti = $('#listaMenuDettaglio');
             for (let i = listaPiatti.length - 1; i >= 0; i--) {
                 $(`<tr id='riga-${listaPiatti[i].id}'>
+                <td><img src='../categorie/${listaPiatti[i].categoria.immagine}' alt='logo' style='width: 50px; border-radius: 50%;'></td>
                 <td>${listaPiatti[i].nome}</td>
                 <td>${listaPiatti[i].prezzo}</td>
                 <td>${listaPiatti[i].categoria.nome}</td>
@@ -121,9 +122,42 @@ $(document).ready(function () {
             type: "DELETE",
             url: `/user/ristorantiuser/${id}`,
             success: function (response) {
-                idPagina.slideUp(300, function () {
-                    idPagina.remove();
+                const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: 'btn btn-danger',
+                        cancelButton: 'btn btn-primary mx-2'
+                    },
+                    buttonsStyling: false
                 })
+                swalWithBootstrapButtons.fire({
+                    title: 'Sei Sicuro?',
+                    text: "Operazione Irreversibile!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Elimina',
+                    cancelButtonText: 'Esci',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        swalWithBootstrapButtons.fire(
+                            'Cancellato!',
+                            'Il tuo Ristorante è stato Eliminato.',
+                            'success'
+                        )
+                        idPagina.slideUp(300, function () {
+                            idPagina.remove();
+                        })
+                    } else if (
+                        result.dismiss === Swal.DismissReason.cancel
+                    ) {
+                        swalWithBootstrapButtons.fire(
+                            'Uscita',
+                            'Il tuo Ristorante è salvo',
+                            'error'
+                        )
+                    }
+                })
+                
             },
             error: function (error) {
                 alert("Errore durante la cancellazione. Riprovare.");
@@ -133,39 +167,7 @@ $(document).ready(function () {
 
     $('#listaRistorantiUser').on('click', '.btn-elimina-risto', function () {
         const id = $(this).attr('data-id');
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-                confirmButton: 'btn btn-danger',
-                cancelButton: 'btn btn-primary mx-2'
-            },
-            buttonsStyling: false
-        })
-        swalWithBootstrapButtons.fire({
-            title: 'Sei Sicuro?',
-            text: "Operazione Irreversibile!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Elimina',
-            cancelButtonText: 'Esci',
-            reverseButtons: true
-        }).then((result) => {
-            if (result.isConfirmed) {
-                swalWithBootstrapButtons.fire(
-                    'Cancellato!',
-                    'Il tuo Ristorante è stato Eliminato.',
-                    'success'
-                )
-                deleteRistorante(id);
-            } else if (
-                result.dismiss === Swal.DismissReason.cancel
-            ) {
-                swalWithBootstrapButtons.fire(
-                    'Uscita',
-                    'Il tuo Ristorante è salvo',
-                    'error'
-                )
-            }
-        })
+        deleteRistorante(id);
     });
 
     //Modifica un ristorante dalla lista principale

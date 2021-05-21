@@ -58,6 +58,7 @@ public class ControllerRistorantiUser {
 
     @GetMapping("/ristorantiuser/{id}")
     public Ristorante getOne(@PathVariable int id) {
+
         Ristorante ristorante = ristorantiGEST.findById(id).orElse(null);
         ristorante.setMenu(piattiGEST.findPiattoByRistoranteId(id));
         for(Piatto piatto : ristorante.getMenu()){

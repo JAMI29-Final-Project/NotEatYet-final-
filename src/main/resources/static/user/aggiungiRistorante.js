@@ -19,9 +19,6 @@ $(document).ready(function () {
                     showConfirmButton: false,
                     timer: 1500
                 })
-                setTimeout(function () {
-                      window.location.href='ristorantiUser.html';
-                    }, 1500);
                 uploadFile(idRistorante);
             },
             error: function () {
@@ -46,7 +43,9 @@ $(document).ready(function () {
             contentType: false,
             processData: false,
             success: function () {
-                console.log("Riuscito");
+                setTimeout(function () {
+                    window.location.href='ristorantiUser.html';
+                  }, 1500);
             },
             error: function () {
                 console.log("Non riuscito");
