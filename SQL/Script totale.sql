@@ -1,4 +1,5 @@
 create database noteatyet;
+use noteatyet;
 
 INSERT INTO noteatyet.users (id, cognome, datadinascita, email, nome, password, ruolo, username) VALUES (1, 'noteatyet', '2021-05-21', 'admin@noteatyet.com', 'NOTEATYET', '$2a$10$FSx56Vfra20ZHdTTnD3lku.2upe7FsHhJDDP6m28HCfkZZzJ4gBj6', 'ADMIN', 'admin');
 INSERT INTO noteatyet.users (id, cognome, datadinascita, email, nome, password, ruolo, username) VALUES (2, 'Carollo', '1999-01-13', 'edoardocarollo1999@gmail.com', 'Edoardo', '$2a$10$6U/dMky28mo0zYa4zABvr.K0GW3sTrE9M/hatygsHbKurQgWLmqrC', 'USER', 'edoardo');
@@ -38,7 +39,7 @@ INSERT INTO noteatyet.ristoranti (id, citta, immagini, ncivico, piva, ragionesoc
 INSERT INTO noteatyet.ristoranti (id, citta, immagini, ncivico, piva, ragionesociale, regione, via, user_id) VALUES (9, 'Milano', 'burgerking.jpg', 20, '0479464946-5', 'Burger King', 'Lombardia', 'Corso Sempione', 5);
 INSERT INTO noteatyet.ristoranti (id, citta, immagini, ncivico, piva, ragionesociale, regione, via, user_id) VALUES (10, 'Bristol', 'piccolino.jpg', 104, '049996766949', 'Piccolino Restaurant', 'Avon', 'Bond Street', 5);
 INSERT INTO noteatyet.ristoranti (id, citta, immagini, ncivico, piva, ragionesociale, regione, via, user_id) VALUES (11, 'Torino', null, 4, '431234324455324', 'Da Cianci ', 'Piemonte', 'Via 4 Marzo', 3);
-INSERT INTO noteatyet.ristoranti (id, citta, immagini, ncivico, piva, ragionesociale, regione, via, user_id) VALUES (12, 'Roma', 'Montagna-Verde-Ristorante-La-Torre-2.jpg.crdownload', 1, '235465753457', 'La Torre', 'Lazio', 'Via dei Poveri Cristi', 3);
+INSERT INTO noteatyet.ristoranti (id, citta, immagini, ncivico, piva, ragionesociale, regione, via, user_id) VALUES (12, 'Roma', 'Montagna-Verde-Ristorante-La-Torre-2.jpg', 1, '235465753457', 'La Torre', 'Lazio', 'Via dei Poveri Cristi', 3);
 INSERT INTO noteatyet.ristoranti (id, citta, immagini, ncivico, piva, ragionesociale, regione, via, user_id) VALUES (13, 'Palermo', 'bugerdownload.jpg', 11, '253458984322', 'Crazy Mouth', 'Sicilia', 'Via dei Caimani D''argento', 3);
 INSERT INTO noteatyet.ristoranti (id, citta, immagini, ncivico, piva, ragionesociale, regione, via, user_id) VALUES (14, 'Milano', 'Trattoria-Montepulciano-Insegne-Antiche.jpg', 3, '3325422222324', 'Sapori di una volta', 'Lombardia', 'Via Bruttoscanu', 3);
 
