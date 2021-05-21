@@ -26,7 +26,7 @@ INSERT INTO noteatyet.categorie (id, immagine, nome) VALUES (16, 'dolci.jpg', 'D
 INSERT INTO noteatyet.categorie (id, immagine, nome) VALUES (17, 'vini.jpg', 'Vini');
 INSERT INTO noteatyet.categorie (id, immagine, nome) VALUES (18, 'digestivi.jpg', 'Digestivi');
 INSERT INTO noteatyet.categorie (id, immagine, nome) VALUES (19, 'bevande.jpg', 'Bevande');
-INSERT INTO noteatyet.categorie (id, immagine, nome) VALUES (20, 'bevande.jpg', 'Caffetteria');
+INSERT INTO noteatyet.categorie (id, immagine, nome) VALUES (20, 'caffetteria.jpg', 'Caffetteria');
 
 INSERT INTO noteatyet.ristoranti (id, citta, immagini, ncivico, piva, ragionesociale, regione, via, user_id) VALUES (1, 'Varese', 'laperla.jpg', 12, '28623760197', 'La perla', 'Lombardia', 'Via Cattaneo', 2);
 INSERT INTO noteatyet.ristoranti (id, citta, immagini, ncivico, piva, ragionesociale, regione, via, user_id) VALUES (2, 'Varese', 'buongusto.jpg', 33, '28643980924', 'Buon Gusto', 'Lombardia', 'Via Impero', 2);
