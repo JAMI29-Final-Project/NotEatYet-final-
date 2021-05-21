@@ -48,6 +48,7 @@ public class Ristorante {
         this.user = user;
         this.menu = menu;
     }
+
     public Ristorante() {
         super();
     }

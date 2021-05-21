@@ -34,7 +34,6 @@ $(document).ready(function () {
         })
     } 
     function uploadFile(idRistorante) {
-        
         console.log(idRistorante + " CONFERMA");
         var data = $('#formFile').val();
         console.log(data);

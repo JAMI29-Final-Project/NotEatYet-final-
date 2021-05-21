@@ -91,8 +91,11 @@ public class ControllerRistorantiUser {
     public void deleteResturant(@PathVariable int id) {
 
         Ristorante ristorante = getOne(id);
-
-        fs.deleteFile(ristorante.getImmagini());
+        if(ristorante.getImmagini() != null) {
+            fs.deleteFile(ristorante.getImmagini());
+        }else{
+            ristorante.setImmagini("Addio");
+        }
         for (Piatto piattodel : ristorante.getMenu()) {
             for(Ingrediente ingrediente : piattodel.getIngredienti()) {
                 ingredientiGEST.deleteById(ingrediente.getId());
@@ -107,7 +110,4 @@ public class ControllerRistorantiUser {
         ristoranteedit.setUser(ristorante.getUser());
         ristorantiGEST.save(ristoranteedit);
     }
-
-
-
 }
