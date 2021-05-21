@@ -71,7 +71,6 @@ public class ApplicationSecuretyConfig extends WebSecurityConfigurerAdapter {
                 .rememberMeParameter("remember-me")
                 .and()
                 .logout().logoutUrl("/logout")
-                .logoutSuccessUrl("/logout.html")
                 .clearAuthentication(true)
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")

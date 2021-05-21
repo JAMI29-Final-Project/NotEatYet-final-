@@ -98,7 +98,7 @@ $(document).ready(function () {
                 $(`<tr id='riga-${listaPiatti[i].id}'>
                 <td><img src='../categorie/${listaPiatti[i].categoria.immagine}' alt='logo' style='width: 50px; border-radius: 50%;'></td>
                 <td>${listaPiatti[i].nome}</td>
-                <td>${listaPiatti[i].prezzo}</td>
+                <td>${listaPiatti[i].prezzo} €</td>
                 <td>${listaPiatti[i].categoria.nome}</td>
                 <td>
                 <div class="btn-group" role="group">
@@ -196,6 +196,13 @@ $(document).ready(function () {
         const id = +$(this).attr('data-id');
         idModifica = id;
         $.get(`/user/ristorantiuser/${id}`, function (modifica) {
+            let img = '';
+            if (modifica.immagini === null) {
+                img = '../logos/logo.png';
+            } else {
+                img = '../upload/' + modifica.immagini;
+            }
+        $('#modificaRistoranteLogo').attr('src', img);
             $('#ragionesociale').val(modifica.ragionesociale);
             $('#piva').val(modifica.piva);
             $('#cittaRistorante').val(modifica.citta);
@@ -329,6 +336,7 @@ $(document).ready(function () {
         console.log(idModificaPiatto);
 
         $.get(`/user/piattiuser/piattoid/${idModificaPiatto}`, function (modifica) {
+            $('#modificaPiattoLogo').attr('src', '../categorie/' + modifica.categoria.immagine);
             $('#nome').val(modifica.nome);
             $('#categoria').val(modifica.categoria.nome);
             $('#prezzo').val(modifica.prezzo);
@@ -352,6 +360,7 @@ $(document).ready(function () {
 
     //MODIFICA PIATTO
     $('#modificaPiatto').click(function (ingredienti) {
+        
        // console.log("Ingre " + ingredienti)
       //  const ingre = null;
         //Prendo valore ingredienti
@@ -530,9 +539,10 @@ $(document).ready(function () {
         $.get(`piattiuser/piattoid/${idDetPiatto}`, function (dettaglio) {
             const dettaglioPiatto = $('#dettaglioPiatto');
             $('#titlePiatto').text(dettaglio.nome + ' Nel Dettaglio');
+            $('#dettaglioPiattoLogo').attr('src', '../categorie/' + dettaglio.categoria.immagine);
             let row = `
             <h4 class='fw-light text-dark'><strong class="fw-bolder">Nome: </strong>${dettaglio.nome}</h4> 
-            <h4 class='fw-light text-dark'><strong>Prezzo: </strong>${dettaglio.prezzo}</h4>   
+            <h4 class='fw-light text-dark'><strong>Prezzo: </strong>${dettaglio.prezzo} €</h4>   
             <h4 class='fw-light text-dark'><strong>Categoria: </strong>${dettaglio.categoria.nome}</h4> 
             <h4 class='fw-light text-dark'><strong>Ingredienti: </strong></h4>
 			`;
@@ -548,7 +558,7 @@ $(document).ready(function () {
                 $(listaingredienti).append(error);
             } else {
                 for (let i = 0; i < ingredienti.length; i++) {
-                    let lista = `<h5 class='fw-light text-dark'>${ingredienti[i].nome}</h5>`;
+                    let lista = `<h5 class='fw-light text-dark'>`+ (i+1) + "." + ` ${ingredienti[i].nome}</h5>`;
                     $(listaingredienti).append(lista);
                 }
             }
