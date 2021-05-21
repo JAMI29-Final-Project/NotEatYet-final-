@@ -88,7 +88,7 @@ body {
 .pictureRistoranti {
     background-image: url('../img/homepage.jpg'); 
     height: 100vh; 
-    margin: 0px; 
+    margin: 0;
     background-size: cover; 
     background-position: top;
 }
@@ -143,3 +143,11 @@ body {
     text-decoration:none;
     }
 /*Fine Search Bar */
+
+.pictureVersione {
+	background-image: url('../img/login_success.jpg'); 
+    height: 100vh; 
+    margin: 0;
+    background-size: cover; 
+    background-position: top;
+}
