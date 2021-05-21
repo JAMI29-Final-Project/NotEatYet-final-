@@ -70,7 +70,7 @@ public class ControllerPiatti {
 //        piatto.setRistorante(ristorante);
 //        piattiGEST.save(piatto);
 //    }
-
+//
 //    @DeleteMapping("/piatti/elimina/{idPiatto}")
 //    public void delete(@PathVariable int idPiatto){
 //        Piatto piatto = piattiGEST.findById(idPiatto).orElse(null);
@@ -82,7 +82,7 @@ public class ControllerPiatti {
 //        }
 //        piattiGEST.deleteById(idPiatto);
 //    }
-
+//
 //    @PutMapping("/piatti/edit/{idCategoria}")
 //    public void editPiatto( @PathVariable int idCategoria, @RequestBody Piatto piattoModifica ){
 //        Piatto piatto = piattiGEST.findById(piattoModifica.getId()).orElse(null);

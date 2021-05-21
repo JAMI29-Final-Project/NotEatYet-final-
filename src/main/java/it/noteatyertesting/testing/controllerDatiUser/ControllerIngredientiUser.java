@@ -33,8 +33,10 @@ public class ControllerIngredientiUser {
     public void elimina (@PathVariable int idIngrediente){
         ingredientiGEST.deleteById(idIngrediente);
     }
+
     @PutMapping("/ingredientiuser/modifica")
     public void modifica (@RequestBody Ingrediente ingrediente){
         ingredientiGEST.save(ingrediente);
     }
+
 }

@@ -9,15 +9,16 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nome;
+    private String immagine;
 
-    public Categoria(int id, String nome) {
-        super();
+    public Categoria(int id, String nome, String immagine) {
         this.id = id;
         this.nome = nome;
+        this.immagine = immagine;
     }
 
     public Categoria() {
-        super();
+
     }
 
     public int getId() {
@@ -34,5 +35,13 @@ public class Categoria {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getImmagine() {
+        return immagine;
+    }
+
+    public void setImmagine(String immagine) {
+        this.immagine = immagine;
     }
 }
