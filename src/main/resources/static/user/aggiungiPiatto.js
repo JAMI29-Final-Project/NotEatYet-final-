@@ -130,17 +130,18 @@ $(document).ready(function () {
                         success: function (res) {
                             idCategoria = -1;
                             idRistorante = -1;
-                            Swal.fire({
-                            icon: 'success',
-                            title: 'INSERITO!',
-                            text: 'Aggiunta andata a buon fine',
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
+                            
                         // uploadFile(idPiatto);
                     },
                 })
             }
+            Swal.fire({
+                icon: 'success',
+                title: 'INSERITO!',
+                text: 'Aggiunta andata a buon fine',
+                showConfirmButton: false,
+                timer: 1500
+            })
             setTimeout(function () {
             window.location.href='ristorantiUser.html';
             }, 1500);
